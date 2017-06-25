@@ -12,8 +12,9 @@
 https://storage.googleapis.com/coverflow-react/index.html
 
 ## Screencast on YouTube
-[![Link to screencast on YouTube]
-(https://img.youtube.com/vi/PpykYaLD4vI/0.jpg)]
-(https://www.youtube.com/watch?v=PpykYaLD4vI)
+https://www.youtube.com/watch?v=PpykYaLD4vI
+
+[![Link to screencast on YouTube](https://img.youtube.com/vi/PpykYaLD4vI/0.jpg)](https://www.youtube.com/watch?v=PpykYaLD4vI)
+
 
 
