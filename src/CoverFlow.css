@@ -1,0 +1,10 @@
+.coverflow{
+  text-align: center;
+  perspective: 400px;
+  background: lightgray;
+  margin: 0;
+  position: relative;
+  height: 300px;
+  box-sizing: border-box;
+  padding: 25px;
+}
