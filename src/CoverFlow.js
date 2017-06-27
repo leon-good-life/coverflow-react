@@ -8,9 +8,10 @@ import './CoverFlow.css';
 class CoverFlow extends React.Component {
   constructor(props){
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.selectItem = this.selectItem.bind(this);
     this.createItems = this.createItems.bind(this);
     this.fillSideAndDistance = this.fillSideAndDistance.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
     const items = this.createItems(this.props.imagesArr);
     this.state = {
       items: items
@@ -18,13 +19,13 @@ class CoverFlow extends React.Component {
   }
   render(){
     return(
-      <div className="coverflow">
+      <div className="coverflow" tabIndex="0" onKeyDown={this.handleKeyDown}>
         {this.state.items.map((item, index)=>{
           return <CoverFlowItem 
                     side={item.side} 
                     distance={item.distance} 
                     imgUrl={item.imgUrl}
-                    handleClick={this.handleClick}
+                    selectItem={this.selectItem}
                     index={index}
                     zIndex={this.props.zIndex}
                     key={index} />;
@@ -32,7 +33,7 @@ class CoverFlow extends React.Component {
       </div>
     );
   }
-  handleClick(index){
+  selectItem(index){
     this.setState((prevState)=>{
       let newClonedState = _.cloneDeep(prevState);
       this.fillSideAndDistance(newClonedState.items, index);
@@ -62,6 +63,20 @@ class CoverFlow extends React.Component {
       items[i].distance = i - index;
     }
     return items;
+  }
+  handleKeyDown(e){
+    let index = _.findIndex(this.state.items, {'side': SIDES.CENTER});
+    if (e.keyCode === 37){
+      // left
+      if(index > 0){
+        this.selectItem(index - 1);
+      }
+    } else if (e.keyCode === 39) {
+      // right
+      if(index + 1 < this.state.items.length){
+        this.selectItem(index + 1);
+      }
+    }
   }
 }
 

@@ -7,4 +7,5 @@
   height: 300px;
   box-sizing: border-box;
   padding: 25px;
+  outline: transparent;
 }

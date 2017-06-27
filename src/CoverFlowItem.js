@@ -22,7 +22,7 @@ class CoverFlowItem extends React.Component {
           className="coverflow-item" 
           style={styles}
           onClick={()=>{
-            this.props.handleClick(this.props.index);
+            this.props.selectItem(this.props.index);
           }}
       ></div>
     );
