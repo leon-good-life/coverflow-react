@@ -2,6 +2,9 @@ import React from 'react';
 import CoverFlow from './CoverFlow';
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+  }
   render() {
     const imagesArr = [
         'img/1.jpg',

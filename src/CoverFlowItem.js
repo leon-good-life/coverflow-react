@@ -5,6 +5,9 @@ import cssTransform from './cssTransform';
 import './CoverFlowItem.css';
 
 class CoverFlowItem extends React.Component {
+  constructor(props){
+    super(props);
+  }
   render(){
     let styles = {
       backgroundImage: `url('${this.props.imgUrl}')`
