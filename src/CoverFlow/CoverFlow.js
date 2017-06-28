@@ -18,6 +18,11 @@ class CoverFlow extends React.Component {
     };
   }
   render(){
+    if (this.state.items.length === 0) {
+      return (
+        <div className="coverflow coverflow-empty" />
+      )
+    }
     return(
       <div className="coverflow" tabIndex="0" onKeyDown={this.handleKeyDown}>
         {this.state.items.map((item, index)=>{

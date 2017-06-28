@@ -9,3 +9,11 @@
   padding: 25px;
   outline: transparent;
 }
+
+.coverflow-empty::after{
+  content: 'No items to show.';
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
