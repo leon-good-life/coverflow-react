@@ -1,5 +1,5 @@
 import React from 'react';
-import CoverFlow from './CoverFlow';
+import CoverFlow from './CoverFlow/CoverFlow';
 
 class App extends React.Component {
   constructor(props){
