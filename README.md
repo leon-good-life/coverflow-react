@@ -17,7 +17,7 @@ https://storage.googleapis.com/coverflow-react/index.html
 ## Usage
 1. If you want to use this coverflow in your project, copy the "coverflow-react/src/CoverFlow" directory into your project.
 ```bash
-cp -R PATH_OF_THIS_CLONED_PROJECT/coverflow-react/src/CoverFlow PATH_OF_YOUR_PROJECT/PATH_OF_3RD_PARTY_COMPONENTS/CoverFlow
+cp -R PATH_OF_THIS_CLONED_PROJECT/coverflow-react/src/CoverFlow PATH_OF_YOUR_PROJECT/CoverFlow
 ```
 
 2. import CoverFlow
