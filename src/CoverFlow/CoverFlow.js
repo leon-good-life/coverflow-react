@@ -85,11 +85,12 @@ class CoverFlow extends React.Component {
   }
 }
 
-CoverFlowItem.propTypes = {
+CoverFlow.propTypes = {
+  imagesArr: PropTypes.array.isRequired,
   zIndex: PropTypes.number
 };
 
-CoverFlowItem.defaultProps = {
+CoverFlow.defaultProps = {
   zIndex: 100
 };
 
