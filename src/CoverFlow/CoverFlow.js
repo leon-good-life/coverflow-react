@@ -24,7 +24,7 @@ class CoverFlow extends React.Component {
       )
     }
     return(
-      <div className="coverflow" tabIndex="0" onKeyDown={this.handleKeyDown}>
+      <div className="coverflow" tabIndex="0" onKeyDown={this.handleKeyDown} style={this.props.containerStyle}>
         {this.state.items.map((item, index)=>{
           return <CoverFlowItem 
                     side={item.side} 
