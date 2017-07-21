@@ -20,15 +20,16 @@ class CoverFlow extends React.Component {
     let styles = {
       textAlign: 'center',
       perspective: '400px',
-      background: 'lightgray',
       margin: '0px',
       position: 'relative',
       height: `${this.props.height}px`,
       boxSizing: 'border-box',
       padding: '25px',
       outline: 'transparent',
+      background: this.props.background,
+      border: this.props.border,
+      boxShadow: this.props.boxShadow
     };
-    _.assign(styles, this.props.containerStyle);
 
     if (this.state.items.length === 0) {
       return (
@@ -112,7 +113,10 @@ CoverFlow.propTypes = {
 
 CoverFlow.defaultProps = {
   zIndex: 100,
-  height: 300
+  height: 300,
+  background: 'lightgray',
+  border: 'none',
+  boxShadow: 'none'
 };
 
 export default CoverFlow;
