@@ -10,8 +10,21 @@ class CoverFlow extends React.Component {
     this.selectItem = this.selectItem.bind(this);
     this.prepareItems = this.prepareItems.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+
+    function calcIndex(){
+      const length = this.props.imagesArr.length;
+      if (length === 0) {
+        return -1;
+      }
+      if (length > 10) {
+        return 4;
+      }
+      return parseInt(this.props.imagesArr.length / 2, 10);
+    }
+
+    calcIndex = calcIndex.bind(this);
     this.state = {
-      selectedIndex: this.props.imagesArr.length ? parseInt(this.props.imagesArr.length / 2, 10) : -1
+      selectedIndex: calcIndex()
     };
   }
   render(){
@@ -48,18 +61,18 @@ class CoverFlow extends React.Component {
 
     let items = this.prepareItems();
     return(
-      <div tabIndex="0" onKeyDown={this.handleKeyDown} style={styles}>
-        {items.map((item, index)=>{
+      <div tabIndex="0" onKeyDown={this.handleKeyDown} style={styles} ref={(coverflow) => { this.coverflow = coverflow; }}>
+        {items.map((item)=>{
           return <CoverFlowItem 
                     side={item.side} 
                     distance={item.distance} 
                     imgUrl={item.imgUrl}
                     selectItem={this.selectItem}
-                    index={index}
+                    index={item.index}
                     zIndex={this.props.zIndex}
                     height={itemHeight}
                     width={itemWidth}
-                    key={index} />;
+                    key={item.index} />;
         })}
       </div>
     );
@@ -68,25 +81,32 @@ class CoverFlow extends React.Component {
     this.setState({selectedIndex: index});
   }
   prepareItems(){
-    const imagesArr = _.cloneDeep(this.props.imagesArr);
-    if (imagesArr.length === 0){
+    if (this.props.imagesArr.length === 0){
       return [];
     }
     const index = this.state.selectedIndex;
-    const items = imagesArr.map(imgUrl=>({imgUrl}));
+    const imagesArr = _.cloneDeep(this.props.imagesArr);
+    const items = imagesArr.map((imgUrl, index)=>({imgUrl, index}));
+
     items[index].side = SIDES.CENTER;
     items[index].distance = 0;
 
-    for(let i = 0; i < index; i++){
+    const fromIndex = Math.max(0, index - 4);
+    const untilIndex = Math.min(imagesArr.length, index + 5);
+
+    for(let i = fromIndex; i < index; i++){
       items[i].side = SIDES.LEFT;
       items[i].distance = index - i;
     }
 
-    for(let i = index + 1; i < items.length; i++){
+    for(let i = index + 1; i < untilIndex; i++){
       items[i].side = SIDES.RIGHT;
       items[i].distance = i - index;
     }
-    return items;
+
+    const tenItems = items.slice(fromIndex, untilIndex);
+
+    return tenItems;
   }
   handleKeyDown(e){
     let index = this.state.selectedIndex;
@@ -101,6 +121,9 @@ class CoverFlow extends React.Component {
         this.selectItem(index + 1);
       }
     }
+  }
+  componentDidMount(){
+    this.coverflow.focus();
   }
 }
 

@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SIDES from './SIDES'
 import cssTransform from './cssTransform';
+import './transition.css';
 
 class CoverFlowItem extends React.Component {
   constructor(props){
     super(props);
+    let tempClassName;
+    this.state = {tempClassName: ''};
   }
   render(){
     let styles = {
@@ -32,11 +35,42 @@ class CoverFlowItem extends React.Component {
     return(
       <div 
           style={styles}
+          className={this.state.tempClassName}
           onClick={()=>{
             this.props.selectItem(this.props.index);
           }}
       ></div>
     );
+  }
+  componentWillMount(){
+    let tempClassName;
+    if (this.props.side === SIDES.LEFT){
+      tempClassName = 'initial-left';
+    } else if (this.props.side === SIDES.RIGHT) {
+      tempClassName = 'initial-right';
+    } else {
+      tempClassName = '';
+    }
+    this.setState({tempClassName});
+  }
+  componentDidMount(){
+    this.timeout = setTimeout(()=>{
+      this.setState({tempClassName: ''});
+    }, 100);
+  }
+  componentWillUnmount(){
+    if (this.timeout){
+      clearTimeout(this.timeout);
+    }
+    let tempClassName;
+    if (this.props.side === SIDES.LEFT){
+      tempClassName = 'initial-left';
+    } else if (this.props.side === SIDES.RIGHT) {
+      tempClassName = 'initial-right';
+    } else {
+      tempClassName = '';
+    }
+    this.setState({tempClassName});
   }
 }
 

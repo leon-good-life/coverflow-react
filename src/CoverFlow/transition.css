@@ -1,0 +1,6 @@
+.initial-left {
+  transform: rotateY(45deg) translate3d(-400px, 0px, -500px) !important;
+}
+.initial-right {
+  transform: rotateY(-45deg) translate3d(400px, 0px, -500px) !important;
+}
