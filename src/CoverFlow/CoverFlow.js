@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import SIDES from './SIDES'
 import CoverFlowItem from './CoverFlowItem';
-import './CoverFlow.css';
 
 class CoverFlow extends React.Component {
   constructor(props){
@@ -18,13 +17,33 @@ class CoverFlow extends React.Component {
     };
   }
   render(){
+    let styles = {
+      textAlign: 'center',
+      perspective: '400px',
+      background: 'lightgray',
+      margin: '0px',
+      position: 'relative',
+      height: '300px',
+      boxSizing: 'border-box',
+      padding: '25px',
+      outline: 'transparent',
+    };
+    _.assign(styles, this.props.containerStyle);
+
     if (this.state.items.length === 0) {
       return (
-        <div className="coverflow coverflow-empty" />
+        <div style={styles}>
+          <div style={{
+            display: 'inline-block',
+            position: 'absolute',
+            left: '50%',
+            top: '50%'
+          }}>No items to show.</div>
+        </div>
       )
     }
     return(
-      <div className="coverflow" tabIndex="0" onKeyDown={this.handleKeyDown} style={this.props.containerStyle}>
+      <div tabIndex="0" onKeyDown={this.handleKeyDown} style={styles}>
         {this.state.items.map((item, index)=>{
           return <CoverFlowItem 
                     side={item.side} 

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SIDES from './SIDES'
 import cssTransform from './cssTransform';
-import './CoverFlowItem.css';
 
 class CoverFlowItem extends React.Component {
   constructor(props){
@@ -10,7 +9,17 @@ class CoverFlowItem extends React.Component {
   }
   render(){
     let styles = {
-      backgroundImage: `url('${this.props.imgUrl}')`
+      backgroundImage: `url('${this.props.imgUrl}')`,
+      left: 'calc(50% - 384px / 2)',
+      width: '384px',
+      height: '240px',
+      backgroundSize: '384px 240px',
+      display: 'inline-block',
+      position: 'absolute',
+      backgroundColor: 'greenyellow',
+      transitionTimingFunction: 'ease-in-out',
+      transition: 'transform 750ms',
+      boxShadow: '30px 5px 15px -10px rgba(0,0,0,.15), -30px 5px 15px -10px rgba(0,0,0,.15)',
     };
     if (this.props.side === SIDES.LEFT || this.props.side === SIDES.RIGHT) {
       styles.transform = cssTransform(this.props.side, this.props.distance);
@@ -22,7 +31,6 @@ class CoverFlowItem extends React.Component {
     }
     return(
       <div 
-          className="coverflow-item" 
           style={styles}
           onClick={()=>{
             this.props.selectItem(this.props.index);
