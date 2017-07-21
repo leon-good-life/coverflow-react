@@ -8,12 +8,10 @@ class CoverFlow extends React.Component {
   constructor(props){
     super(props);
     this.selectItem = this.selectItem.bind(this);
-    this.createItems = this.createItems.bind(this);
-    this.fillSideAndDistance = this.fillSideAndDistance.bind(this);
+    this.prepareItems = this.prepareItems.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    const items = this.createItems(this.props.imagesArr);
     this.state = {
-      items: items
+      selectedIndex: this.props.imagesArr.length ? parseInt(this.props.imagesArr.length / 2, 10) : -1
     };
   }
   render(){
@@ -31,7 +29,7 @@ class CoverFlow extends React.Component {
       boxShadow: this.props.boxShadow
     };
 
-    if (this.state.items.length === 0) {
+    if (this.props.imagesArr.length === 0) {
       return (
         <div style={styles}>
           <div style={{
@@ -47,9 +45,11 @@ class CoverFlow extends React.Component {
     [ratio.x, ratio.y] = this.props.itemRatio.split(':').map(x=>parseFloat(x));
     const itemHeight = this.props.height - 60;
     const itemWidth = itemHeight * ratio.x / ratio.y;
+
+    let items = this.prepareItems();
     return(
       <div tabIndex="0" onKeyDown={this.handleKeyDown} style={styles}>
-        {this.state.items.map((item, index)=>{
+        {items.map((item, index)=>{
           return <CoverFlowItem 
                     side={item.side} 
                     distance={item.distance} 
@@ -65,22 +65,15 @@ class CoverFlow extends React.Component {
     );
   }
   selectItem(index){
-    this.setState((prevState)=>{
-      let newClonedState = _.cloneDeep(prevState);
-      this.fillSideAndDistance(newClonedState.items, index);
-      return newClonedState;
-    });
+    this.setState({selectedIndex: index});
   }
-  createItems(imagesArr){
-    if (imagesArr.length === 0) {
+  prepareItems(){
+    const imagesArr = _.cloneDeep(this.props.imagesArr);
+    if (imagesArr.length === 0){
       return [];
     }
-    let items = imagesArr.map(imgUrl=>({imgUrl}));
-    const index = parseInt(imagesArr.length / 2, 10);
-    this.fillSideAndDistance(items, index);
-    return items;
-  }
-  fillSideAndDistance(items, index){
+    const index = this.state.selectedIndex;
+    const items = imagesArr.map(imgUrl=>({imgUrl}));
     items[index].side = SIDES.CENTER;
     items[index].distance = 0;
 
@@ -96,7 +89,7 @@ class CoverFlow extends React.Component {
     return items;
   }
   handleKeyDown(e){
-    let index = _.findIndex(this.state.items, {'side': SIDES.CENTER});
+    let index = this.state.selectedIndex;
     if (e.keyCode === 37){
       // left
       if(index > 0){
@@ -104,7 +97,7 @@ class CoverFlow extends React.Component {
       }
     } else if (e.keyCode === 39) {
       // right
-      if(index + 1 < this.state.items.length){
+      if(index + 1 < this.props.imagesArr.length){
         this.selectItem(index + 1);
       }
     }
