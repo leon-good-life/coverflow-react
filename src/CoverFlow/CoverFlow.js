@@ -39,7 +39,7 @@ class CoverFlow extends React.Component {
             position: 'absolute',
             left: '50%',
             top: '50%'
-          }}>No items to show.</div>
+          }}>{this.props.emptyMessage}</div>
         </div>
       )
     }
@@ -116,7 +116,8 @@ CoverFlow.defaultProps = {
   height: 300,
   background: 'lightgray',
   border: 'none',
-  boxShadow: 'none'
+  boxShadow: 'none',
+  emptyMessage: 'No items to show.'
 };
 
 export default CoverFlow;
