@@ -108,7 +108,12 @@ class CoverFlow extends React.Component {
 
 CoverFlow.propTypes = {
   imagesArr: PropTypes.array.isRequired,
-  zIndex: PropTypes.number
+  zIndex: PropTypes.number,
+  height: PropTypes.number,
+  background: PropTypes.string,
+  border: PropTypes.string,
+  boxShadow: PropTypes.string,
+  emptyMessage: PropTypes.string
 };
 
 CoverFlow.defaultProps = {

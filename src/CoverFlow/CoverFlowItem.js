@@ -42,7 +42,8 @@ class CoverFlowItem extends React.Component {
 
 CoverFlowItem.propTypes = {
   side: PropTypes.oneOf([SIDES.LEFT, SIDES.CENTER, SIDES.RIGHT]).isRequired,
-  zIndex: PropTypes.number
+  zIndex: PropTypes.number,
+  height: PropTypes.number
 };
 
 CoverFlowItem.defaultProps = {
