@@ -10,10 +10,10 @@ class CoverFlowItem extends React.Component {
   render(){
     let styles = {
       backgroundImage: `url('${this.props.imgUrl}')`,
-      left: 'calc(50% - 384px / 2)',
-      width: '384px',
+      left: `calc(50% - ${this.props.width}px / 2)`,
+      width: `${this.props.width}px`,
       height: `${this.props.height}px`,
-      backgroundSize: `384px ${this.props.height}px`,
+      backgroundSize: `${this.props.width}px ${this.props.height}px`,
       display: 'inline-block',
       position: 'absolute',
       backgroundColor: 'greenyellow',
@@ -43,7 +43,8 @@ class CoverFlowItem extends React.Component {
 CoverFlowItem.propTypes = {
   side: PropTypes.oneOf([SIDES.LEFT, SIDES.CENTER, SIDES.RIGHT]).isRequired,
   zIndex: PropTypes.number,
-  height: PropTypes.number
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired
 };
 
 CoverFlowItem.defaultProps = {

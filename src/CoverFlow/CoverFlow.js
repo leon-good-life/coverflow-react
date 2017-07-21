@@ -43,6 +43,10 @@ class CoverFlow extends React.Component {
         </div>
       )
     }
+    let ratio = {};
+    [ratio.x, ratio.y] = this.props.itemRatio.split(':').map(x=>parseFloat(x));
+    const itemHeight = this.props.height - 60;
+    const itemWidth = itemHeight * ratio.x / ratio.y;
     return(
       <div tabIndex="0" onKeyDown={this.handleKeyDown} style={styles}>
         {this.state.items.map((item, index)=>{
@@ -53,7 +57,8 @@ class CoverFlow extends React.Component {
                     selectItem={this.selectItem}
                     index={index}
                     zIndex={this.props.zIndex}
-                    height={this.props.height-60}
+                    height={itemHeight}
+                    width={itemWidth}
                     key={index} />;
         })}
       </div>
@@ -113,7 +118,8 @@ CoverFlow.propTypes = {
   background: PropTypes.string,
   border: PropTypes.string,
   boxShadow: PropTypes.string,
-  emptyMessage: PropTypes.string
+  emptyMessage: PropTypes.string,
+  itemRatio: PropTypes.string
 };
 
 CoverFlow.defaultProps = {
@@ -122,7 +128,8 @@ CoverFlow.defaultProps = {
   background: 'lightgray',
   border: 'none',
   boxShadow: 'none',
-  emptyMessage: 'No items to show.'
+  emptyMessage: 'No items to show.',
+  itemRatio: '8:5'
 };
 
 export default CoverFlow;

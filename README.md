@@ -48,3 +48,4 @@ const imagesArr = [
 * border - a css border property. The default is 'none'. You can assign any valid css border.
 * boxShadow - a css box-shadow property. The default is 'none'. You can assign any valid css box-shadow.
 * emptyMessage - a message the user see when there are no items. The default message is 'No items to show.'. This property allows to customize this message. It is particularly useful for internationalization and localization, by allowing coverflow to adapt to different languages.
+* itemRatio - aspect ratio of coverflow items. The default is '8:5'.
