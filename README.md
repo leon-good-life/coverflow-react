@@ -42,10 +42,10 @@ const imagesArr = [
 ```
 
 ### Optional props
-* zIndex - by default it is 100. If there are conflicts with z-index in your project. You can pass zIndex you want.
-* height - the height of coverflow container in pixels. The default is 300. The height of coverflow item is calculated automatically. It is 60px less than the height of the container.
-* background - a css background property. The default is 'lightgray'. You can assign any valid css background.
-* border - a css border property. The default is 'none'. You can assign any valid css border.
-* boxShadow - a css box-shadow property. The default is 'none'. You can assign any valid css box-shadow.
-* emptyMessage - a message the user see when there are no items. The default message is 'No items to show.'. This property allows to customize this message. It is particularly useful for internationalization and localization, by allowing coverflow to adapt to different languages.
-* itemRatio - aspect ratio of coverflow items. The default is '8:5'.
+* **zIndex** - by default it is 100. If there are conflicts with z-index in your project. You can pass zIndex you want.
+* **height** - the height of coverflow container in pixels. The default is 300. The height of coverflow item is calculated automatically. It is 60px less than the height of the container.
+* **emptyMessage** - a message the user see when there are no items. The default message is 'No items to show.'. This property allows to customize this message. It is particularly useful for internationalization and localization, by allowing coverflow to adapt to different languages.
+* **itemRatio** - aspect ratio of coverflow items. The default is '8:5'.
+* **background** - a css background property. The default is 'lightgray'. You can assign any valid css background.
+* **border** - a css border property. The default is 'none'. You can assign any valid css border.
+* **boxShadow** - a css box-shadow property. The default is 'none'. You can assign any valid css box-shadow.
