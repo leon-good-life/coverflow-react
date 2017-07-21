@@ -23,7 +23,7 @@ class CoverFlow extends React.Component {
       background: 'lightgray',
       margin: '0px',
       position: 'relative',
-      height: '300px',
+      height: `${this.props.height}px`,
       boxSizing: 'border-box',
       padding: '25px',
       outline: 'transparent',
@@ -52,6 +52,7 @@ class CoverFlow extends React.Component {
                     selectItem={this.selectItem}
                     index={index}
                     zIndex={this.props.zIndex}
+                    height={this.props.height-60}
                     key={index} />;
         })}
       </div>
@@ -110,7 +111,8 @@ CoverFlow.propTypes = {
 };
 
 CoverFlow.defaultProps = {
-  zIndex: 100
+  zIndex: 100,
+  height: 300
 };
 
 export default CoverFlow;

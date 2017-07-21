@@ -44,3 +44,4 @@ const imagesArr = [
 ### Optional props
 * zIndex - by default it is 100. If there are conflicts with z-index in your project. You can pass zIndex you want.
 * containerStyle - add or override the styles of CoverFlow container. For example, ``` containerStyle={{background: 'gray'}} ``` can be added to modify the CSS backgroud property.
+* height - the height of coverflow container in pixels. The default is 300. The height of coverflow item is calculated automatically. It is 60px less than the height of the container.
