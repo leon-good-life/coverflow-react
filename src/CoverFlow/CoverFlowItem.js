@@ -7,7 +7,6 @@ import './transition.css';
 class CoverFlowItem extends React.Component {
   constructor(props){
     super(props);
-    let tempClassName;
     this.state = {tempClassName: ''};
   }
   render(){
