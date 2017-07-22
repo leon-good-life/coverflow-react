@@ -79,6 +79,9 @@ class CoverFlow extends React.Component {
   }
   selectItem(index){
     this.setState({selectedIndex: index});
+    if (this.props.handleSelect) {
+      this.props.handleSelect(index);
+    }
   }
   prepareItems(){
     if (this.props.imagesArr.length === 0){
@@ -135,7 +138,8 @@ CoverFlow.propTypes = {
   border: PropTypes.string,
   boxShadow: PropTypes.string,
   emptyMessage: PropTypes.string,
-  itemRatio: PropTypes.string
+  itemRatio: PropTypes.string,
+  handleSelect: PropTypes.func
 };
 
 CoverFlow.defaultProps = {

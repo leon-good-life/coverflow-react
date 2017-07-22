@@ -49,3 +49,7 @@ const imagesArr = [
 * **background** - a css background property. The default is 'lightgray'. You can assign any valid css background.
 * **border** - a css border property. The default is 'none'. You can assign any valid css border.
 * **boxShadow** - a css box-shadow property. The default is 'none'. You can assign any valid css box-shadow.
+* **handleSelect** - you can pass a callback function. The function has an index parameter.
+```html
+<CoverFlow handleSelect={(index)=>{alert(index);}} imagesArr={imagesArr} />
+```
