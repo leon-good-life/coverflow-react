@@ -10,21 +10,9 @@ class CoverFlow extends React.Component {
     this.selectItem = this.selectItem.bind(this);
     this.prepareItems = this.prepareItems.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-
-    function calcIndex(){
-      const length = this.props.imagesArr.length;
-      if (length === 0) {
-        return -1;
-      }
-      if (length > 10) {
-        return 4;
-      }
-      return parseInt(this.props.imagesArr.length / 2, 10);
-    }
-
-    calcIndex = calcIndex.bind(this);
+    this.calcIndex = this.calcIndex.bind(this);
     this.state = {
-      selectedIndex: calcIndex()
+      selectedIndex: this.calcIndex()
     };
   }
   render(){
@@ -127,6 +115,16 @@ class CoverFlow extends React.Component {
   }
   componentDidMount(){
     this.coverflow.focus();
+  }
+  calcIndex(){
+    const length = this.props.imagesArr.length;
+    if (length === 0) {
+      return -1;
+    }
+    if (length > 10) {
+      return 4;
+    }
+    return parseInt(this.props.imagesArr.length / 2, 10);
   }
 }
 
