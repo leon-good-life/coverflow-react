@@ -37,7 +37,7 @@ const imagesArr = [
     ];
 ```
 4. Add CoverFlow Component to your project and pass images array.
-```html
+```jsx
 <CoverFlow imagesArr={imagesArr} />
 ```
 
@@ -50,6 +50,6 @@ const imagesArr = [
 * **border** - a css border property. The default is 'none'. You can assign any valid css border.
 * **boxShadow** - a css box-shadow property. The default is 'none'. You can assign any valid css box-shadow.
 * **handleSelect** - you can pass a callback function. The function has an index parameter.
-```html
+```jsx
 <CoverFlow handleSelect={(index)=>{alert(index);}} imagesArr={imagesArr} />
 ```
