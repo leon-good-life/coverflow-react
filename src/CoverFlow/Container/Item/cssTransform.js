@@ -23,6 +23,10 @@ function cssTransform(side, distance){
     return template(left.deg, left.x, left.z);
   } else if (side === SIDES.RIGHT) {
     return template(right.deg, right.x, right.z);
+  } else if (side === SIDES.REMOVED_LEFT){
+    return cssTransform(SIDES.LEFT, 4);
+  } else if (side === SIDES.REMOVED_RIGHT){
+    return cssTransform(SIDES.RIGHT, 4);
   } else {
     throw 'Error: side is undefined or invalid.';
   }

@@ -23,13 +23,16 @@ class Item extends React.Component {
       transition: 'transform 750ms',
       boxShadow: '30px 5px 15px -10px rgba(0,0,0,.15), -30px 5px 15px -10px rgba(0,0,0,.15)',
     };
-    if (this.props.side === SIDES.LEFT || this.props.side === SIDES.RIGHT) {
+    if (this.props.side === SIDES.LEFT || this.props.side === SIDES.RIGHT
+          || this.props.side === SIDES.REMOVED_LEFT || this.props.side === SIDES.REMOVED_RIGHT) {
       styles.transform = cssTransform(this.props.side, this.props.distance);
     }
     if (this.props.side === SIDES.CENTER){
       styles.zIndex = this.props.zIndex;
     } else if (this.props.side === SIDES.RIGHT){
       styles.zIndex = this.props.zIndex - this.props.distance;
+    } else if (this.props.side === SIDES.REMOVED_RIGHT){
+      styles.zIndex = this.props.zIndex - this.props.distance - 1;
     }
     return(
       <div 
@@ -74,7 +77,7 @@ class Item extends React.Component {
 }
 
 Item.propTypes = {
-  side: PropTypes.oneOf([SIDES.LEFT, SIDES.CENTER, SIDES.RIGHT]).isRequired,
+  side: PropTypes.oneOf([SIDES.LEFT, SIDES.CENTER, SIDES.RIGHT, SIDES.REMOVED_RIGHT, SIDES.REMOVED_LEFT]).isRequired,
   zIndex: PropTypes.number,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired

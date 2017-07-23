@@ -11,8 +11,10 @@ class Container extends React.Component {
     this.prepareItems = this.prepareItems.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.calcIndex = this.calcIndex.bind(this);
+    let index = this.calcIndex();
     this.state = {
-      selectedIndex: this.calcIndex()
+      selectedIndex: index,
+      prevIndex: index
     };
   }
   render(){
@@ -45,7 +47,10 @@ class Container extends React.Component {
     );
   }
   selectItem(index){
-    this.setState({selectedIndex: index});
+    this.setState((prevState)=>({
+      selectedIndex: index,
+      prevIndex: prevState.selectedIndex
+    }));
     if (this.props.handleSelect) {
       this.props.handleSelect(index);
     }
@@ -61,8 +66,8 @@ class Container extends React.Component {
     items[index].side = SIDES.CENTER;
     items[index].distance = 0;
 
-    const fromIndex = Math.max(0, index - 4);
-    const untilIndex = Math.min(imagesArr.length, index + 5);
+    let fromIndex = Math.max(0, index - 4);
+    let untilIndex = Math.min(imagesArr.length, index + 5);
 
     for(let i = fromIndex; i < index; i++){
       items[i].side = SIDES.LEFT;
@@ -74,9 +79,28 @@ class Container extends React.Component {
       items[i].distance = i - index;
     }
 
-    const tenItems = items.slice(fromIndex, untilIndex);
+    if (items.length < 10){
+      return items;
+    }
 
-    return tenItems;
+    // calc removed items, in order to animate them.
+    let amount = index - this.state.prevIndex;
+    if (amount > 0 && fromIndex > 4) {
+      for(let i = fromIndex - amount; i < fromIndex; i++){
+        items[i].side = SIDES.REMOVED_LEFT;
+        items[i].distance = index - i;
+      }
+      fromIndex -= amount;
+    } else if (amount < 0 && untilIndex + amount < items.length - 5) {
+      amount *= -1;
+      for(let i = untilIndex; i < untilIndex + amount; i++){
+        items[i].side = SIDES.REMOVED_RIGHT;
+        items[i].distance = i - index;
+      }
+      untilIndex += amount;
+    }
+
+    return items.slice(fromIndex, untilIndex);
   }
   handleKeyDown(e){
     let index = this.state.selectedIndex;
