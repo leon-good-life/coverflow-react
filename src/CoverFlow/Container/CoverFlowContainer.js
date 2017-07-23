@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import SIDES from './SIDES'
-import CoverFlowItem from './CoverFlowItem';
+import CoverFlowItem from './Item/CoverFlowItem';
 
 class CoverFlowContainer extends React.Component {
   constructor(props){

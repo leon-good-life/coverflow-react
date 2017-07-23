@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SIDES from './SIDES'
+import SIDES from '../SIDES'
 import cssTransform from './cssTransform';
 import './transition.css';
 

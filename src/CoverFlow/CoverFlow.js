@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CoverFlowEmptyContainer from './CoverFlowEmptyContainer';
-import CoverFlowContainer from './CoverFlowContainer';
+import CoverFlowEmptyContainer from './Container/CoverFlowEmptyContainer';
+import CoverFlowContainer from './Container/CoverFlowContainer';
 
 class CoverFlow extends React.Component {
   render(){

@@ -1,4 +1,4 @@
-import SIDES from './SIDES';
+import SIDES from '../SIDES';
 
 function cssTransform(side, distance){
 
