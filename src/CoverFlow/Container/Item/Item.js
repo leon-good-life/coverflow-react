@@ -4,7 +4,7 @@ import SIDES from '../SIDES'
 import cssTransform from './cssTransform';
 import './transition.css';
 
-class CoverFlowItem extends React.Component {
+class Item extends React.Component {
   constructor(props){
     super(props);
     this.state = {tempClassName: ''};
@@ -73,15 +73,15 @@ class CoverFlowItem extends React.Component {
   }
 }
 
-CoverFlowItem.propTypes = {
+Item.propTypes = {
   side: PropTypes.oneOf([SIDES.LEFT, SIDES.CENTER, SIDES.RIGHT]).isRequired,
   zIndex: PropTypes.number,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired
 };
 
-CoverFlowItem.defaultProps = {
+Item.defaultProps = {
   zIndex: 100
 };
 
-export default CoverFlowItem;
+export default Item;

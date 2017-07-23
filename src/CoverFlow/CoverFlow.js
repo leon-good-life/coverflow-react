@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CoverFlowEmptyContainer from './Container/CoverFlowEmptyContainer';
-import CoverFlowContainer from './Container/CoverFlowContainer';
+import EmptyContainer from './Container/EmptyContainer';
+import Container from './Container/Container';
 
 class CoverFlow extends React.Component {
   render(){
@@ -20,7 +20,7 @@ class CoverFlow extends React.Component {
     };
 
     if (this.props.imagesArr.length === 0) {
-      return <CoverFlowEmptyContainer 
+      return <EmptyContainer 
                 sharedStyles={styles}
                 emptyMessage={this.props.emptyMessage}
                 height={this.props.height}
@@ -28,7 +28,7 @@ class CoverFlow extends React.Component {
                 border={this.props.border}
                 boxShadow={this.props.boxShadow} />;
     }
-    return <CoverFlowContainer 
+    return <Container 
                 sharedStyles={styles}
                 imagesArr={this.props.imagesArr}
                 itemRatio={this.props.itemRatio}

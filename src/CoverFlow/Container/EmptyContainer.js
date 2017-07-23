@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class CoverFlowEmptyContainer extends React.Component {
+class EmptyContainer extends React.Component {
   render(){
     return (
       <div style={this.props.sharedStyles}>
@@ -16,7 +16,7 @@ class CoverFlowEmptyContainer extends React.Component {
   }
 }
 
-CoverFlowEmptyContainer.propTypes = {
+EmptyContainer.propTypes = {
   emptyMessage: PropTypes.string,
   height: PropTypes.number,
   background: PropTypes.string,
@@ -24,4 +24,4 @@ CoverFlowEmptyContainer.propTypes = {
   boxShadow: PropTypes.string
 };
 
-export default CoverFlowEmptyContainer;
+export default EmptyContainer;

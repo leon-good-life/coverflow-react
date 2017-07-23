@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import SIDES from './SIDES'
-import CoverFlowItem from './Item/CoverFlowItem';
+import Item from './Item/Item';
 
-class CoverFlowContainer extends React.Component {
+class Container extends React.Component {
   constructor(props){
     super(props);
     this.selectItem = this.selectItem.bind(this);
@@ -30,7 +30,7 @@ class CoverFlowContainer extends React.Component {
              this.coverflow = coverflow; 
            }}>
         {items.map((item)=>{
-          return <CoverFlowItem 
+          return <Item 
                     side={item.side} 
                     distance={item.distance} 
                     imgUrl={item.imgUrl}
@@ -107,7 +107,7 @@ class CoverFlowContainer extends React.Component {
   }
 }
 
-CoverFlowContainer.propTypes = {
+Container.propTypes = {
   imagesArr: PropTypes.array.isRequired,
   zIndex: PropTypes.number,
   height: PropTypes.number,
@@ -118,4 +118,4 @@ CoverFlowContainer.propTypes = {
   handleSelect: PropTypes.func
 };
 
-export default CoverFlowContainer;
+export default Container;
