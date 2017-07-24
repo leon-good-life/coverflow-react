@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class EmptyContainer extends React.Component {
   render(){
     return (
-      <div style={this.props.sharedStyles}>
+      <div style={this.props.containerStyles}>
         <div style={{
           display: 'inline-block',
           position: 'absolute',

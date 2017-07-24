@@ -27,7 +27,7 @@ class Container extends React.Component {
     return(
       <div tabIndex="0" 
            onKeyDown={this.handleKeyDown} 
-           style={this.props.sharedStyles} 
+           style={this.props.containerStyles} 
            ref={(coverflow) => { 
              this.coverflow = coverflow; 
            }}>

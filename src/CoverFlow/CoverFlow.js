@@ -21,7 +21,7 @@ class CoverFlow extends React.Component {
 
     if (this.props.imagesArr.length === 0) {
       return <EmptyContainer 
-                sharedStyles={styles}
+                containerStyles={styles}
                 emptyMessage={this.props.emptyMessage}
                 height={this.props.height}
                 background={this.props.background}
@@ -29,7 +29,7 @@ class CoverFlow extends React.Component {
                 boxShadow={this.props.boxShadow} />;
     }
     return <Container 
-                sharedStyles={styles}
+                containerStyles={styles}
                 imagesArr={this.props.imagesArr}
                 itemRatio={this.props.itemRatio}
                 zIndex={this.props.zIndex}
