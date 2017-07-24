@@ -53,3 +53,6 @@ const imagesArr = [
 ```jsx
 <CoverFlow handleSelect={(index)=>{alert(index);}} imagesArr={imagesArr} />
 ```
+
+## Features
+* Support for large amount of images, by rendering only some of them in a time, and with easy navigation and smooth animation, the user can see all the images.
