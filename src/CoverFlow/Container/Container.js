@@ -11,6 +11,7 @@ class Container extends React.Component {
     this.prepareItems = this.prepareItems.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.calcIndex = this.calcIndex.bind(this);
+    this.calcItemDimensions = this.calcItemDimensions.bind(this);
     let index = this.calcIndex();
     this.state = {
       selectedIndex: index,
@@ -18,11 +19,8 @@ class Container extends React.Component {
     };
   }
   render(){
-    let ratio = {};
-    [ratio.x, ratio.y] = this.props.itemRatio.split(':').map(x=>parseFloat(x));
-    const itemHeight = this.props.height - 60;
-    const itemWidth = itemHeight * ratio.x / ratio.y;
-
+    let itemWidth, itemHeight;
+    [itemWidth, itemHeight] = this.calcItemDimensions();
     let items = this.prepareItems();
     return(
       <div tabIndex="0" 
@@ -59,6 +57,10 @@ class Container extends React.Component {
     if (this.props.imagesArr.length === 0){
       return [];
     }
+    const AMOUNT_TO_RENDER = 10;
+    const LEFT = AMOUNT_TO_RENDER / 2 - 1;
+    const RIGHT = AMOUNT_TO_RENDER / 2;
+
     const index = this.state.selectedIndex;
     const imagesArr = _.cloneDeep(this.props.imagesArr);
     const items = imagesArr.map((imgUrl, index)=>({imgUrl, index}));
@@ -66,8 +68,8 @@ class Container extends React.Component {
     items[index].side = SIDES.CENTER;
     items[index].distance = 0;
 
-    let fromIndex = Math.max(0, index - 4);
-    let untilIndex = Math.min(imagesArr.length, index + 5);
+    let fromIndex = Math.max(0, index - LEFT);
+    let untilIndex = Math.min(imagesArr.length, index + RIGHT);
 
     for(let i = fromIndex; i < index; i++){
       items[i].side = SIDES.LEFT;
@@ -79,19 +81,19 @@ class Container extends React.Component {
       items[i].distance = i - index;
     }
 
-    if (items.length < 10){
+    if (items.length < AMOUNT_TO_RENDER){
       return items;
     }
 
     // calc removed items, in order to animate them.
     let amount = index - this.state.prevIndex;
-    if (amount > 0 && fromIndex > 4) {
+    if (amount > 0 && fromIndex > LEFT) {
       for(let i = fromIndex - amount; i < fromIndex; i++){
         items[i].side = SIDES.REMOVED_LEFT;
         items[i].distance = index - i;
       }
       fromIndex -= amount;
-    } else if (amount < 0 && untilIndex + amount < items.length - 5) {
+    } else if (amount < 0 && untilIndex + amount < items.length - RIGHT) {
       amount *= -1;
       for(let i = untilIndex; i < untilIndex + amount; i++){
         items[i].side = SIDES.REMOVED_RIGHT;
@@ -128,6 +130,13 @@ class Container extends React.Component {
       return 4;
     }
     return parseInt(this.props.imagesArr.length / 2, 10);
+  }
+  calcItemDimensions(){
+    let ratio = {};
+    [ratio.x, ratio.y] = this.props.itemRatio.split(':').map(x=>parseFloat(x));
+    const itemHeight = this.props.height - 60;
+    const itemWidth = itemHeight * ratio.x / ratio.y;
+    return [itemWidth, itemHeight];
   }
 }
 
