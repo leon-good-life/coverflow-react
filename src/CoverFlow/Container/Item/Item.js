@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SIDES from '../SIDES'
-import cssTransform from './cssTransform';
+import SIDES from '../SIDES';
 import './transition.css';
 
 class Item extends React.Component {
   constructor(props){
     super(props);
+    this.cssTransform = this.cssTransform.bind(this);
     this.state = {tempClassName: ''};
   }
   render(){
@@ -25,7 +25,7 @@ class Item extends React.Component {
     };
     if (this.props.side === SIDES.LEFT || this.props.side === SIDES.RIGHT
           || this.props.side === SIDES.REMOVED_LEFT || this.props.side === SIDES.REMOVED_RIGHT) {
-      styles.transform = cssTransform(this.props.side, this.props.distance);
+      styles.transform = this.cssTransform(this.props.side, this.props.distance);
     }
     if (this.props.side === SIDES.CENTER){
       styles.zIndex = this.props.zIndex;
@@ -47,9 +47,9 @@ class Item extends React.Component {
   componentWillMount(){
     let tempClassName;
     if (this.props.side === SIDES.LEFT){
-      tempClassName = 'initial-left';
+      tempClassName = `initial-left-${this.props.max}`;
     } else if (this.props.side === SIDES.RIGHT) {
-      tempClassName = 'initial-right';
+      tempClassName = `initial-right-${this.props.max}`;
     } else {
       tempClassName = '';
     }
@@ -66,13 +66,43 @@ class Item extends React.Component {
     }
     let tempClassName;
     if (this.props.side === SIDES.LEFT){
-      tempClassName = 'initial-left';
+      tempClassName = `initial-left-${this.props.max}`;
     } else if (this.props.side === SIDES.RIGHT) {
-      tempClassName = 'initial-right';
+      tempClassName = `initial-right-${this.props.max}`;
     } else {
       tempClassName = '';
     }
     this.setState({tempClassName});
+  }
+  cssTransform(side, distance){
+    const template = (deg, x, z) =>
+      `rotateY(${deg}deg) translate3d(${x}px, 0px, ${z}px)`;
+
+    const z = -100 * distance - 100;
+
+    const left = {
+      deg: 45,
+      x: -100 * distance,
+      z
+    };
+
+    const right = {
+      deg: -45,
+      x: 100 * distance,
+      z
+    };
+
+    if (side === SIDES.LEFT) {
+      return template(left.deg, left.x, left.z);
+    } else if (side === SIDES.RIGHT) {
+      return template(right.deg, right.x, right.z);
+    } else if (side === SIDES.REMOVED_LEFT){
+      return this.cssTransform(SIDES.LEFT, this.props.max);
+    } else if (side === SIDES.REMOVED_RIGHT){
+      return this.cssTransform(SIDES.RIGHT, this.props.max);
+    } else {
+      throw 'Error: side is undefined or invalid.';
+    }
   }
 }
 

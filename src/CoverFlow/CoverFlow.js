@@ -11,6 +11,8 @@ class CoverFlow extends React.Component {
       margin: '0px',
       position: 'relative',
       height: `${this.props.height}px`,
+      width: `${this.props.width}px`,
+      display: 'inline-block',
       boxSizing: 'border-box',
       padding: '25px',
       outline: 'transparent',
@@ -24,6 +26,7 @@ class CoverFlow extends React.Component {
                 containerStyles={styles}
                 emptyMessage={this.props.emptyMessage}
                 height={this.props.height}
+                width={this.props.width}
                 background={this.props.background}
                 border={this.props.border}
                 boxShadow={this.props.boxShadow} />;
@@ -35,6 +38,7 @@ class CoverFlow extends React.Component {
                 zIndex={this.props.zIndex}
                 handleSelect={this.props.handleSelect}
                 height={this.props.height}
+                width={this.props.width}
                 background={this.props.background}
                 border={this.props.border}
                 boxShadow={this.props.boxShadow} />;
@@ -45,6 +49,7 @@ CoverFlow.propTypes = {
   imagesArr: PropTypes.array.isRequired,
   zIndex: PropTypes.number,
   height: PropTypes.number,
+  width: PropTypes.number,
   background: PropTypes.string,
   border: PropTypes.string,
   boxShadow: PropTypes.string,
@@ -56,6 +61,7 @@ CoverFlow.propTypes = {
 CoverFlow.defaultProps = {
   zIndex: 100,
   height: 300,
+  width: document.body.offsetWidth,
   background: 'lightgray',
   border: 'none',
   boxShadow: 'none',
