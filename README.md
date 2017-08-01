@@ -1,5 +1,15 @@
 # Coverflow ReactJS
 
+```bash
+npm install --save coverflow-react
+```
+
+## Live Demo
+https://storage.googleapis.com/coverflow-react/index.html
+
+## Screencast on YouTube
+[![Link to screencast on YouTube](youtube-screenshot.png)](https://www.youtube.com/watch?v=PpykYaLD4vI)
+
 ## Usage
 ### Using CoverFlow in your project
 1. Add coverflow-react package to your project using npm.
@@ -27,13 +37,6 @@ const imagesArr = [
 <CoverFlow imagesArr={imagesArr} />
 ```
 
-
-
-## Live Demo
-https://storage.googleapis.com/coverflow-react/index.html
-
-## Screencast on YouTube
-[![Link to screencast on YouTube](youtube-screenshot.png)](https://www.youtube.com/watch?v=PpykYaLD4vI)
 
 
 ### Optional props
