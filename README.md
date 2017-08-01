@@ -1,5 +1,10 @@
 # Coverflow ReactJS
 
+
+[![npm version](https://badge.fury.io/js/coverflow-react.svg)](http://badge.fury.io/js/coverflow-react)
+
+[![NPM](https://nodei.co/npm/coverflow-react.png)](https://nodei.co/npm/coverflow-react/)
+
 ```bash
 npm install --save coverflow-react
 ```
