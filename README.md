@@ -13,7 +13,7 @@ npm install --save coverflow-react
 https://storage.googleapis.com/coverflow-react/index.html
 
 ## Screencast on YouTube
-[![Link to screencast on YouTube](youtube-screenshot.png)](https://www.youtube.com/watch?v=PpykYaLD4vI)
+[![Link to screencast on YouTube](https://raw.githubusercontent.com/leon-good-life/coverflow-react/master/youtube-screenshot.png)](https://www.youtube.com/watch?v=PpykYaLD4vI)
 
 ## Usage
 ### Using CoverFlow in your project
