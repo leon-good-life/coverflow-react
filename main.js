@@ -1,1 +1,1 @@
-module.exports = require('./src/CoverFlow/CoverFlow');
+module.exports = require('./lib/CoverFlow');
