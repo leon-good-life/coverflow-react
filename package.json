@@ -1,6 +1,7 @@
 {
   "name": "coverflow-react",
-  "version": "0.1.2",
+  "version": "0.1.4",
+  "license": "MIT",
   "main": "main.js",
   "dependencies": {
     "lodash": "^4.17.4",
