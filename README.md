@@ -1,4 +1,4 @@
-# Coverflow ReactJS
+# Coverflow React
 
 
 [![npm version](https://badge.fury.io/js/coverflow-react.svg)](http://badge.fury.io/js/coverflow-react)
