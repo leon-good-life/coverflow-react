@@ -61,6 +61,7 @@ const imagesArr = [
 * Support for large amount of images, by rendering only some of them in a time, and with easy navigation and smooth animation, the user can see all the images.
 
 ## Contributing
+Opening issues and code contributions are welcomed.
 ### Installation instructions
 
 
