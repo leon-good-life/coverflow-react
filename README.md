@@ -37,6 +37,8 @@ const imagesArr = [
         'img/5.jpg'
     ];
 ```
+(If you are using create-react-app, you can put the images in 'public' directory).
+
 4. Add CoverFlow Component to your project and pass images array.
 ```jsx
 <CoverFlow imagesArr={imagesArr} />
