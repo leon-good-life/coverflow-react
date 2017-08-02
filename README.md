@@ -68,3 +68,7 @@ const imagesArr = [
     cd coverflow
     npm install
     npm start
+    
+    
+## Credits for images in the demo
+Uncopyrited images from Pixabay and Pexels.
