@@ -6,7 +6,11 @@ class Demo extends React.Component {
     super(props);
     this.state = {
       width: document.body.offsetWidth,
-      height: 300
+      height: 300,
+      itemRatio: {
+        x: 8,
+        y: 5
+      }
     };
     window.addEventListener('resize', ()=>{
       this.setState({width: document.body.offsetWidth});
@@ -37,7 +41,11 @@ class Demo extends React.Component {
     ];
     return (
       <div>
-        <CoverFlow imagesArr={imagesArr} width={this.state.width} height={this.state.height} />
+        <CoverFlow imagesArr={imagesArr} 
+                   width={this.state.width}
+                   height={this.state.height}
+                   itemRatio={`${this.state.itemRatio.x}:${this.state.itemRatio.y}`}  />
+
         <div style={{margin:'10px', padding: '10px', textAlign: 'center'}}>
 
           <label>Width:</label>
@@ -56,6 +64,31 @@ class Demo extends React.Component {
                  onChange={(e)=>{
                    this.setState({height: parseInt(e.target.value)});
                  }} />
+          <br />
+
+          <label>Item Ratio:</label>
+          <input placeholder="x" 
+                 type="number" 
+                 style={{width: '60px'}}
+                 value={this.state.itemRatio.x} 
+                 onChange={(e)=>{
+                   this.setState({
+                     itemRatio: {
+                       x: parseInt(e.target.value),
+                       y: this.state.itemRatio.y
+                     }});
+                 }} />
+          <input placeholder="x" 
+                type="number" 
+                style={{width: '60px'}}
+                value={this.state.itemRatio.y}
+                onChange={(e)=>{
+                  this.setState({
+                    itemRatio: {
+                      x: this.state.itemRatio.x,
+                      y: parseInt(e.target.value)
+                    }});
+                }} />
           <br />
         </div>
       </div>
