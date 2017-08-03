@@ -10,7 +10,8 @@ class Demo extends React.Component {
       itemRatio: {
         x: 8,
         y: 5
-      }
+      },
+      background: '#f0f0f0'
     };
     window.addEventListener('resize', ()=>{
       this.setState({width: document.body.offsetWidth});
@@ -44,13 +45,15 @@ class Demo extends React.Component {
         <CoverFlow imagesArr={imagesArr} 
                    width={this.state.width}
                    height={this.state.height}
-                   itemRatio={`${this.state.itemRatio.x}:${this.state.itemRatio.y}`}  />
+                   itemRatio={`${this.state.itemRatio.x}:${this.state.itemRatio.y}`}
+                   background={this.state.background} />
 
         <div style={{margin:'10px', padding: '10px', textAlign: 'center'}}>
 
           <label>Width:</label>
           <input placeholder="width" 
                  type="number"
+                 min="1"
                  value={this.state.width} 
                  onChange={(e)=>{
                   this.setState({width: parseInt(e.target.value)});
@@ -60,6 +63,7 @@ class Demo extends React.Component {
           <label>Height:</label>
           <input placeholder="height" 
                  type="number" 
+                 min="1"
                  value={this.state.height} 
                  onChange={(e)=>{
                    this.setState({height: parseInt(e.target.value)});
@@ -69,6 +73,7 @@ class Demo extends React.Component {
           <label>Item Ratio:</label>
           <input placeholder="x" 
                  type="number" 
+                 min="1"
                  style={{width: '60px'}}
                  value={this.state.itemRatio.x} 
                  onChange={(e)=>{
@@ -80,6 +85,7 @@ class Demo extends React.Component {
                  }} />
           <input placeholder="x" 
                 type="number" 
+                min="1"
                 style={{width: '60px'}}
                 value={this.state.itemRatio.y}
                 onChange={(e)=>{
@@ -90,6 +96,14 @@ class Demo extends React.Component {
                     }});
                 }} />
           <br />
+
+          <label>Background:</label>
+          <input type="color" 
+                 value={this.state.background} 
+                 onChange={(e)=>{
+                   this.setState({background: e.target.value});
+                 }} />
+          <br/>
         </div>
       </div>
     );
