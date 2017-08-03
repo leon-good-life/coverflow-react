@@ -1,9 +1,16 @@
 import React from 'react';
-import Demo from './Demo';
+import CoverFlow from './CoverFlow/CoverFlow';
 
 class App extends React.Component {
   render() {
-    return <Demo />;
+    const imagesArr = [
+        'img/1.jpg',
+        'img/2.jpg',
+        'img/3.jpg',
+        'img/4.jpg',
+        'img/5.jpg'
+    ];
+    return <CoverFlow imagesArr={imagesArr} />;
   }
 }
 
