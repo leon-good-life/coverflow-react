@@ -42,14 +42,14 @@ class Demo extends React.Component {
         'img/20.jpg'
     ];
     return (
-      <div>
+      <div className="demo">
         <CoverFlow imagesArr={imagesArr} 
                    width={this.state.width}
                    height={this.state.height}
                    itemRatio={`${this.state.itemRatio.x}:${this.state.itemRatio.y}`}
                    background={this.state.background} />
 
-        <div style={{margin:'10px', padding: '10px', textAlign: 'center'}}>
+        <div>
 
           <form>
             <label>Container Width:</label>
