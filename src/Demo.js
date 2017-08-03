@@ -104,6 +104,21 @@ class Demo extends React.Component {
                    this.setState({background: e.target.value});
                  }} />
           <br/>
+
+          <code style={{
+                  padding: '10px',
+                  display: 'inline-block',
+                  margin: '10px',
+                  background: 'beige',
+                  color: 'darkgoldenrod'}}>
+                {`<CoverFlow imagesArr={imagesArr} 
+                      width="${this.state.width}"
+                      height="${this.state.height}"
+                      itemRatio="${this.state.itemRatio.x}:${this.state.itemRatio.y}"
+                      background="${this.state.background}" />`}
+          </code>
+          <br />
+
         </div>
       </div>
     );
