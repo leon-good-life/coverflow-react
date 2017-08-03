@@ -39,8 +39,24 @@ class Demo extends React.Component {
       <div>
         <CoverFlow imagesArr={imagesArr} width={this.state.width} height={this.state.height} />
         <div style={{margin:'10px', padding: '10px', textAlign: 'center'}}>
-          <label>Width:</label><input placeholder="width" type="number" value={this.state.width} onChange={(e)=>{this.setState({width: parseInt(e.target.value)})}} /><br />
-          <label>Height:</label><input placeholder="height" type="number" value={this.state.height} onChange={(e)=>{this.setState({height: parseInt(e.target.value)})}} /><br />
+
+          <label>Width:</label>
+          <input placeholder="width" 
+                 type="number"
+                 value={this.state.width} 
+                 onChange={(e)=>{
+                  this.setState({width: parseInt(e.target.value)});
+                 }} />
+          <br />
+          
+          <label>Height:</label>
+          <input placeholder="height" 
+                 type="number" 
+                 value={this.state.height} 
+                 onChange={(e)=>{
+                   this.setState({height: parseInt(e.target.value)});
+                 }} />
+          <br />
         </div>
       </div>
     );
