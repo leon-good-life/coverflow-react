@@ -59,7 +59,7 @@ class Container extends React.Component {
     if (this.props.imagesArr.length === 0){
       return [];
     }
-    const AMOUNT_TO_RENDER = this.calcItemsAmountToRender();//9;
+    const AMOUNT_TO_RENDER = this.calcItemsAmountToRender();
     const SIDE_AMOUNT = Math.floor(AMOUNT_TO_RENDER / 2);
 
     const index = this.state.selectedIndex;
@@ -82,7 +82,7 @@ class Container extends React.Component {
       items[i].distance = i - index;
     }
 
-    if (items.length <= AMOUNT_TO_RENDER){
+    if (items.length < AMOUNT_TO_RENDER){
       return items;
     }
 
@@ -154,7 +154,7 @@ class Container extends React.Component {
     } else if (amount > 11) {
       amount = 11;
     }
-    return amount;
+    return Math.min(amount, this.props.imagesArr.length);
   }
 }
 
