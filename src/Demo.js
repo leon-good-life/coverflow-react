@@ -1,5 +1,6 @@
 import React from 'react';
 import CoverFlow from './CoverFlow/CoverFlow';
+import './demo.css';
 
 class Demo extends React.Component {
   constructor(props){
@@ -50,67 +51,66 @@ class Demo extends React.Component {
 
         <div style={{margin:'10px', padding: '10px', textAlign: 'center'}}>
 
-          <label>Container Width:</label>
-          <input placeholder="width" 
-                 type="number"
-                 min="1"
-                 value={this.state.width} 
-                 onChange={(e)=>{
-                  this.setState({width: parseInt(e.target.value)});
-                 }} />
-          <br />
-          
-          <label>Container Height:</label>
-          <input placeholder="height" 
-                 type="number" 
-                 min="1"
-                 value={this.state.height} 
-                 onChange={(e)=>{
-                   this.setState({height: parseInt(e.target.value)});
-                 }} />
+          <form>
+            <label>Container Width:</label>
+            <input placeholder="width" 
+                  type="number"
+                  min="1"
+                  value={this.state.width} 
+                  onChange={(e)=>{
+                    this.setState({width: parseInt(e.target.value)});
+                  }} />
+            <br />
+            
+            <label>Container Height:</label>
+            <input placeholder="height" 
+                  type="number" 
+                  min="1"
+                  value={this.state.height} 
+                  onChange={(e)=>{
+                    this.setState({height: parseInt(e.target.value)});
+                  }} />
+            <br />
+
+            <label>Item Ratio:</label>
+            <input placeholder="x" 
+                  type="number" 
+                  min="1"
+                  style={{width: '60px'}}
+                  value={this.state.itemRatio.x} 
+                  onChange={(e)=>{
+                    this.setState({
+                      itemRatio: {
+                        x: parseInt(e.target.value),
+                        y: this.state.itemRatio.y
+                      }});
+                  }} />
+            <input placeholder="y" 
+                  type="number" 
+                  min="1"
+                  style={{width: '60px'}}
+                  value={this.state.itemRatio.y}
+                  onChange={(e)=>{
+                    this.setState({
+                      itemRatio: {
+                        x: this.state.itemRatio.x,
+                        y: parseInt(e.target.value)
+                      }});
+                  }} />
+            <br />
+
+            <label>Container Background:</label>
+            <input type="color" 
+                  value={this.state.background} 
+                  onChange={(e)=>{
+                    this.setState({background: e.target.value});
+                  }} />
+            <br/>
+          </form>
+
           <br />
 
-          <label>Item Ratio:</label>
-          <input placeholder="x" 
-                 type="number" 
-                 min="1"
-                 style={{width: '60px'}}
-                 value={this.state.itemRatio.x} 
-                 onChange={(e)=>{
-                   this.setState({
-                     itemRatio: {
-                       x: parseInt(e.target.value),
-                       y: this.state.itemRatio.y
-                     }});
-                 }} />
-          <input placeholder="x" 
-                type="number" 
-                min="1"
-                style={{width: '60px'}}
-                value={this.state.itemRatio.y}
-                onChange={(e)=>{
-                  this.setState({
-                    itemRatio: {
-                      x: this.state.itemRatio.x,
-                      y: parseInt(e.target.value)
-                    }});
-                }} />
-          <br />
-
-          <label>Container Background:</label>
-          <input type="color" 
-                 value={this.state.background} 
-                 onChange={(e)=>{
-                   this.setState({background: e.target.value});
-                 }} />
-          <br/>
-
-          <code style={{
-                  padding: '10px',
-                  display: 'inline-block',
-                  margin: '10px',
-                  background: 'beige',
-                  color: 'darkgoldenrod'}}>
+          <code>
                 {`<CoverFlow imagesArr={imagesArr} 
                       width="${this.state.width}"
                       height="${this.state.height}"
