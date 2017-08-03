@@ -50,7 +50,7 @@ class Demo extends React.Component {
 
         <div style={{margin:'10px', padding: '10px', textAlign: 'center'}}>
 
-          <label>Width:</label>
+          <label>Container Width:</label>
           <input placeholder="width" 
                  type="number"
                  min="1"
@@ -60,7 +60,7 @@ class Demo extends React.Component {
                  }} />
           <br />
           
-          <label>Height:</label>
+          <label>Container Height:</label>
           <input placeholder="height" 
                  type="number" 
                  min="1"
@@ -97,7 +97,7 @@ class Demo extends React.Component {
                 }} />
           <br />
 
-          <label>Background:</label>
+          <label>Container Background:</label>
           <input type="color" 
                  value={this.state.background} 
                  onChange={(e)=>{
