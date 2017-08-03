@@ -13,7 +13,7 @@ npm install --save coverflow-react
 https://storage.googleapis.com/coverflow-react/index.html
 
 ### Demo project
-There is a [coverflow-react-demo](https://github.com/leon-good-life/coverflow-react-demo) repository on GitHub, that demostrates features of this widget.
+There is a [coverflow-react-demo](https://github.com/leon-good-life/coverflow-react-demo) repository on GitHub, that demonstrates features of this widget.
 
 ## Screencast on YouTube
 [![Link to screencast on YouTube](https://raw.githubusercontent.com/leon-good-life/coverflow-react/master/youtube-screenshot.png)](https://www.youtube.com/watch?v=PpykYaLD4vI)
