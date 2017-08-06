@@ -18,7 +18,8 @@ class Container extends React.Component {
       selectedIndex: index,
       prevIndex: index,
       xDown: null,
-      yDown: null
+      yDown: null,
+      pauseWheelEvent: false
     };
   }
   render(){
@@ -70,6 +71,25 @@ class Container extends React.Component {
                 yDown: null,
               });                 
            }}
+           onWheel={(e)=>{
+              if (this.state.pauseWheelEvent) {
+                return;
+              }
+              let index = this.state.selectedIndex;
+              if (e.deltaX < 0) {
+                if(index + 1 < this.props.imagesArr.length){
+                  this.selectItem(index + 1);
+                }
+              } else if (e.deltaX > 0) {
+                if(index > 0){
+                  this.selectItem(index - 1);
+                }
+              }
+              this.setState({pauseWheelEvent: true});
+              this.timeout = setTimeout(()=>{
+                this.setState({pauseWheelEvent: false});
+              }, 200);
+           }}
            ref={(coverflow) => { 
              this.coverflow = coverflow; 
            }}>
@@ -88,6 +108,11 @@ class Container extends React.Component {
         })}
       </div>
     );
+  }
+  componentWillUnmount(){
+    if(this.timeout) {
+      clearTimeout(this.timeout);
+    }
   }
   selectItem(index){
     this.setState((prevState)=>({
