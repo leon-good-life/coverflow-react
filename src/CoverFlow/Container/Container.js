@@ -16,7 +16,9 @@ class Container extends React.Component {
     let index = this.calcIndex();
     this.state = {
       selectedIndex: index,
-      prevIndex: index
+      prevIndex: index,
+      xDown: null,
+      yDown: null
     };
   }
   render(){
@@ -27,6 +29,47 @@ class Container extends React.Component {
       <div tabIndex="0" 
            onKeyDown={this.handleKeyDown} 
            style={this.props.containerStyles} 
+           onTouchStart={(e)=>{
+              this.setState({
+                xDown: e.touches[0].clientX,
+                yDown: e.touches[0].clientY,
+              });
+           }}
+           onTouchMove={(e)=>{
+              if (this.state.xDown === null || this.state.yDown === null) {
+                  return;
+              }
+
+              let index = this.state.selectedIndex;
+
+              let xUp = e.touches[0].clientX;                                    
+              let yUp = e.touches[0].clientY;
+
+              let xDiff = this.state.xDown - xUp;
+              let yDiff = this.state.yDown - yUp;
+
+              if (Math.abs(xDiff) > Math.abs(yDiff)) {
+                  if (xDiff > 0){
+                    if(index + 1 < this.props.imagesArr.length){
+                      this.selectItem(index + 1);
+                    }
+                  } else{
+                    if(index > 0){
+                      this.selectItem(index - 1);
+                    }
+                  }                       
+              } else {
+                  if (yDiff > 0) {
+                      /* up swipe */ 
+                  } else { 
+                      /* down swipe */
+                  }                                                                 
+              }
+              this.setState({
+                xDown: null,
+                yDown: null,
+              });                 
+           }}
            ref={(coverflow) => { 
              this.coverflow = coverflow; 
            }}>
