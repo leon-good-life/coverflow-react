@@ -10,6 +10,8 @@ class Container extends React.Component {
     this.selectItem = this.selectItem.bind(this);
     this.prepareItems = this.prepareItems.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleWheel = this.handleWheel.bind(this);
+    this.handleTouchMove = this.handleTouchMove.bind(this);
     this.calcIndex = this.calcIndex.bind(this);
     this.calcItemDimensions = this.calcItemDimensions.bind(this);
     this.calcItemsAmountToRender = this.calcItemsAmountToRender.bind(this);
@@ -36,60 +38,8 @@ class Container extends React.Component {
                 yDown: e.touches[0].clientY,
               });
            }}
-           onTouchMove={(e)=>{
-              if (this.state.xDown === null || this.state.yDown === null) {
-                  return;
-              }
-
-              let index = this.state.selectedIndex;
-
-              let xUp = e.touches[0].clientX;                                    
-              let yUp = e.touches[0].clientY;
-
-              let xDiff = this.state.xDown - xUp;
-              let yDiff = this.state.yDown - yUp;
-
-              if (Math.abs(xDiff) > Math.abs(yDiff)) {
-                  if (xDiff > 0){
-                    if(index + 1 < this.props.imagesArr.length){
-                      this.selectItem(index + 1);
-                    }
-                  } else{
-                    if(index > 0){
-                      this.selectItem(index - 1);
-                    }
-                  }                       
-              } else {
-                  if (yDiff > 0) {
-                      /* up swipe */ 
-                  } else { 
-                      /* down swipe */
-                  }                                                                 
-              }
-              this.setState({
-                xDown: null,
-                yDown: null,
-              });                 
-           }}
-           onWheel={(e)=>{
-              if (this.state.pauseWheelEvent) {
-                return;
-              }
-              let index = this.state.selectedIndex;
-              if (e.deltaX < 0) {
-                if(index + 1 < this.props.imagesArr.length){
-                  this.selectItem(index + 1);
-                }
-              } else if (e.deltaX > 0) {
-                if(index > 0){
-                  this.selectItem(index - 1);
-                }
-              }
-              this.setState({pauseWheelEvent: true});
-              this.timeout = setTimeout(()=>{
-                this.setState({pauseWheelEvent: false});
-              }, 200);
-           }}
+           onTouchMove={this.handleTouchMove}
+           onWheel={this.handleWheel}
            ref={(coverflow) => { 
              this.coverflow = coverflow; 
            }}>
@@ -191,6 +141,61 @@ class Container extends React.Component {
         this.selectItem(index + 1);
       }
     }
+  }
+  handleWheel(e){
+      if (this.state.pauseWheelEvent) {
+        return;
+      }
+      let index = this.state.selectedIndex;
+      if (e.deltaX < 0) {
+        if(index + 1 < this.props.imagesArr.length){
+          this.selectItem(index + 1);
+        }
+      } else if (e.deltaX > 0) {
+        if(index > 0){
+          this.selectItem(index - 1);
+        }
+      }
+      this.setState({pauseWheelEvent: true});
+      this.timeout = setTimeout(()=>{
+        this.setState({pauseWheelEvent: false});
+      }, 200);
+  }
+  handleTouchMove(e){
+
+    if (this.state.xDown === null || this.state.yDown === null) {
+        return;
+    }
+
+    let index = this.state.selectedIndex;
+
+    let xUp = e.touches[0].clientX;                                    
+    let yUp = e.touches[0].clientY;
+
+    let xDiff = this.state.xDown - xUp;
+    let yDiff = this.state.yDown - yUp;
+
+    if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        if (xDiff > 0){
+          if(index + 1 < this.props.imagesArr.length){
+            this.selectItem(index + 1);
+          }
+        } else{
+          if(index > 0){
+            this.selectItem(index - 1);
+          }
+        }                       
+    } else {
+        if (yDiff > 0) {
+            /* up swipe */ 
+        } else { 
+            /* down swipe */
+        }                                                                 
+    }
+    this.setState({
+      xDown: null,
+      yDown: null,
+    });
   }
   componentDidMount(){
     this.coverflow.focus();
