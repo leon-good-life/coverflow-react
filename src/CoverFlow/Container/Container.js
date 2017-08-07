@@ -4,6 +4,7 @@ import _ from 'lodash';
 import SIDES from './SIDES'
 import Item from './Item/Item';
 import SwipeReact from 'swipe-react';
+import WheelReact from 'wheel-react';
 
 class Container extends React.Component {
   constructor(props){
@@ -11,7 +12,6 @@ class Container extends React.Component {
     this.selectItem = this.selectItem.bind(this);
     this.prepareItems = this.prepareItems.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleWheel = this.handleWheel.bind(this);
     this.calcIndex = this.calcIndex.bind(this);
     this.calcItemDimensions = this.calcItemDimensions.bind(this);
     this.calcItemsAmountToRender = this.calcItemsAmountToRender.bind(this);
@@ -21,7 +21,7 @@ class Container extends React.Component {
       prevIndex: index,
       pauseWheelEvent: false
     };
-    SwipeReact.config({
+    let configuration = {
       left: () => {
         let index = this.state.selectedIndex;
         if(index + 1 < this.props.imagesArr.length){
@@ -34,7 +34,9 @@ class Container extends React.Component {
           this.selectItem(index - 1);
         }
       }
-    });
+    };
+    SwipeReact.config(configuration);
+    WheelReact.config(configuration);
   }
   render(){
     let itemWidth, itemHeight;
@@ -45,7 +47,7 @@ class Container extends React.Component {
            onKeyDown={this.handleKeyDown} 
            style={this.props.containerStyles} 
            {...SwipeReact.events}
-           onWheel={this.handleWheel}
+           {...WheelReact.events}
            ref={(coverflow) => { 
              this.coverflow = coverflow; 
            }}>
@@ -69,9 +71,7 @@ class Container extends React.Component {
     this.coverflow.focus();
   }
   componentWillUnmount(){
-    if(this.timeout) {
-      clearTimeout(this.timeout);
-    }
+    WheelReact.clearTimeout();
   }
   selectItem(index){
     this.setState((prevState)=>({
@@ -150,25 +150,6 @@ class Container extends React.Component {
         this.selectItem(index + 1);
       }
     }
-  }
-  handleWheel(e){
-      if (this.state.pauseWheelEvent) {
-        return;
-      }
-      let index = this.state.selectedIndex;
-      if (e.deltaX < 0) {
-        if(index + 1 < this.props.imagesArr.length){
-          this.selectItem(index + 1);
-        }
-      } else if (e.deltaX > 0) {
-        if(index > 0){
-          this.selectItem(index - 1);
-        }
-      }
-      this.setState({pauseWheelEvent: true});
-      this.timeout = setTimeout(()=>{
-        this.setState({pauseWheelEvent: false});
-      }, 200);
   }
   calcIndex(){
     const length = this.props.imagesArr.length;
