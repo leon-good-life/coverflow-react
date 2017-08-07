@@ -11,6 +11,7 @@ class Container extends React.Component {
     this.prepareItems = this.prepareItems.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleWheel = this.handleWheel.bind(this);
+    this.handleTouchStart = this.handleTouchStart.bind(this);
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.calcIndex = this.calcIndex.bind(this);
     this.calcItemDimensions = this.calcItemDimensions.bind(this);
@@ -32,12 +33,7 @@ class Container extends React.Component {
       <div tabIndex="0" 
            onKeyDown={this.handleKeyDown} 
            style={this.props.containerStyles} 
-           onTouchStart={(e)=>{
-              this.setState({
-                xDown: e.touches[0].clientX,
-                yDown: e.touches[0].clientY,
-              });
-           }}
+           onTouchStart={this.handleTouchStart}
            onTouchMove={this.handleTouchMove}
            onWheel={this.handleWheel}
            ref={(coverflow) => { 
@@ -160,6 +156,12 @@ class Container extends React.Component {
       this.timeout = setTimeout(()=>{
         this.setState({pauseWheelEvent: false});
       }, 200);
+  }
+  handleTouchStart(e){
+    this.setState({
+      xDown: e.touches[0].clientX,
+      yDown: e.touches[0].clientY,
+    });
   }
   handleTouchMove(e){
 
