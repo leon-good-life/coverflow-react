@@ -1,13 +1,14 @@
 {
   "name": "coverflow-react",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "license": "MIT",
   "main": "main.js",
   "dependencies": {
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "swipe-react": "^1.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
