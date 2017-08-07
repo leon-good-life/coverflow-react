@@ -77,7 +77,12 @@ Opening issues and code contributions are welcomed.
     git clone https://github.com/leon-good-life/coverflow-react.git
     cd coverflow-react
     npm install
-    npm start
+
+
+
+    npm build
+    npm pack
+
     
     
 ## Credits for images in the demo

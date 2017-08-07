@@ -1,6 +1,6 @@
 {
   "name": "coverflow-react",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "license": "MIT",
   "main": "main.js",
   "dependencies": {
@@ -13,15 +13,12 @@
     "wheel-react": "^1.0.1"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "merge-stream": "^1.0.1",
-    "react-scripts": "1.0.7"
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "build": "babel src --out-dir lib --presets=react,es2015 --copy-files",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
