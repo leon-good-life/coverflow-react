@@ -5,13 +5,13 @@ import SIDES from './SIDES'
 import Item from './Item/Item';
 import SwipeReact from 'swipe-react';
 import WheelReact from 'wheel-react';
+import ArrowKeysReact from 'arrow-keys-react';
 
 class Container extends React.Component {
   constructor(props){
     super(props);
     this.selectItem = this.selectItem.bind(this);
     this.prepareItems = this.prepareItems.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
     this.calcIndex = this.calcIndex.bind(this);
     this.calcItemDimensions = this.calcItemDimensions.bind(this);
     this.calcItemsAmountToRender = this.calcItemsAmountToRender.bind(this);
@@ -21,22 +21,29 @@ class Container extends React.Component {
       prevIndex: index,
       pauseWheelEvent: false
     };
-    let configuration = {
-      left: () => {
-        let index = this.state.selectedIndex;
-        if(index + 1 < this.props.imagesArr.length){
-          this.selectItem(index + 1);
-        }
-      },
-      right: () => {
-        let index = this.state.selectedIndex;
-        if(index > 0){
-          this.selectItem(index - 1);
-        }
+    let next = () => {
+      let index = this.state.selectedIndex;
+      if(index + 1 < this.props.imagesArr.length){
+        this.selectItem(index + 1);
       }
     };
-    SwipeReact.config(configuration);
-    WheelReact.config(configuration);
+    let previous = () => {
+      let index = this.state.selectedIndex;
+      if(index > 0){
+        this.selectItem(index - 1);
+      }
+    };
+    let keysConfig = {
+      left: previous,
+      right: next
+    };
+    let touchConfig = {
+      left: next,
+      right: previous
+    };
+    SwipeReact.config(touchConfig);
+    WheelReact.config(touchConfig);
+    ArrowKeysReact.config(keysConfig);
   }
   render(){
     let itemWidth, itemHeight;
@@ -44,10 +51,10 @@ class Container extends React.Component {
     let items = this.prepareItems();
     return(
       <div tabIndex="0" 
-           onKeyDown={this.handleKeyDown} 
            style={this.props.containerStyles} 
            {...SwipeReact.events}
            {...WheelReact.events}
+           {...ArrowKeysReact.events}
            ref={(coverflow) => { 
              this.coverflow = coverflow; 
            }}>
@@ -136,20 +143,6 @@ class Container extends React.Component {
     }
 
     return items.slice(fromIndex, untilIndex);
-  }
-  handleKeyDown(e){
-    let index = this.state.selectedIndex;
-    if (e.keyCode === 37){
-      // left
-      if(index > 0){
-        this.selectItem(index - 1);
-      }
-    } else if (e.keyCode === 39) {
-      // right
-      if(index + 1 < this.props.imagesArr.length){
-        this.selectItem(index + 1);
-      }
-    }
   }
   calcIndex(){
     const length = this.props.imagesArr.length;
