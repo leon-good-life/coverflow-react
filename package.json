@@ -1,16 +1,21 @@
 {
   "name": "coverflow-react",
-  "version": "0.1.15",
+  "version": "0.1.18",
   "license": "MIT",
+  "author": "leon.good.life",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leon-good-life/swipe-react.git"
+  },
   "dependencies": {
-    "arrow-keys-react": "^1.0.2",
+    "arrow-keys-react": "^1.0.4",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "swipe-react": "^1.0.1",
-    "wheel-react": "^1.0.1"
+    "swipe-react": "^1.0.3",
+    "wheel-react": "^1.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -20,5 +25,12 @@
   "scripts": {
     "build": "babel src --out-dir lib --presets=react,es2015 --copy-files",
     "test": "echo \"Error: no test specified\" && exit 1"
-  }
+  },
+  "keywords": [
+    "cowerflow",
+    "react",
+    "react coverflow",
+    "carousel",
+    "cover flow"
+  ]
 }
