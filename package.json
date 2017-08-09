@@ -1,12 +1,12 @@
 {
   "name": "coverflow-react",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "license": "MIT",
   "author": "leon.good.life",
   "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leon-good-life/swipe-react.git"
+    "url": "git+https://github.com/leon-good-life/coverflow-react.git"
   },
   "dependencies": {
     "arrow-keys-react": "^1.0.4",
