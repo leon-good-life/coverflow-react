@@ -34,6 +34,21 @@ class Item extends React.Component {
     } else if (this.props.side === SIDES.REMOVED_RIGHT){
       styles.zIndex = this.props.zIndex - this.props.distance - 1;
     }
+    let labelJsx = '';
+    if (this.props.label !== null) {
+      labelJsx = (
+        <div style={{
+          background: 'rgba(0,0,0,0.5)',
+          color: 'white',
+          padding: '5px',
+          bottom: '0',
+          position: 'absolute',
+          width: '100%',
+          boxSizing: 'border-box',
+          userSelect: 'none'
+        }}>{this.props.label}</div>
+      );
+    }
     return(
       <div 
           style={styles}
@@ -41,7 +56,7 @@ class Item extends React.Component {
           onClick={()=>{
             this.props.selectItem(this.props.index);
           }}
-      ></div>
+      >{labelJsx}</div>
     );
   }
   componentWillMount(){

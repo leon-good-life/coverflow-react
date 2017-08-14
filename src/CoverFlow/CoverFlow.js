@@ -34,6 +34,7 @@ class CoverFlow extends React.Component {
     return <Container 
                 containerStyles={styles}
                 imagesArr={this.props.imagesArr}
+                labelsArr={this.props.labelsArr}
                 itemRatio={this.props.itemRatio}
                 zIndex={this.props.zIndex}
                 handleSelect={this.props.handleSelect}
@@ -55,7 +56,8 @@ CoverFlow.propTypes = {
   boxShadow: PropTypes.string,
   emptyMessage: PropTypes.string,
   itemRatio: PropTypes.string,
-  handleSelect: PropTypes.func
+  handleSelect: PropTypes.func,
+  labelsArr: PropTypes.array
 };
 
 CoverFlow.defaultProps = {
@@ -66,7 +68,8 @@ CoverFlow.defaultProps = {
   border: 'none',
   boxShadow: 'none',
   emptyMessage: 'No items to show.',
-  itemRatio: '8:5'
+  itemRatio: '8:5',
+  labelsArr: []
 };
 
 export default CoverFlow;

@@ -69,6 +69,7 @@ class Container extends React.Component {
                     zIndex={this.props.zIndex}
                     height={itemHeight}
                     width={itemWidth}
+                    label={item.label}
                     key={item.index} />;
         })}
       </div>
@@ -98,8 +99,11 @@ class Container extends React.Component {
 
     const index = this.state.selectedIndex;
     const imagesArr = _.cloneDeep(this.props.imagesArr);
-    const items = imagesArr.map((imgUrl, index)=>({imgUrl, index}));
+    const items = imagesArr.map((imgUrl, index)=>({imgUrl, index, label: null}));
 
+    for (let i = 0; i < this.props.labelsArr.length; i++) {
+      items[i].label = this.props.labelsArr[i];
+    }
     items[index].side = SIDES.CENTER;
     items[index].distance = 0;
 
