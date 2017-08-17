@@ -62,6 +62,7 @@ const imagesArr = [
 <CoverFlow handleSelect={(index)=>{alert(index);}} imagesArr={imagesArr} />
 ```
 * **labelsArr** - allows to add text labels at the bottom of the images, the array must be the same size of imagesArr.
+* **direction** - the default is "horizontal", if passing "vertical", the CoverFlow will transform to vertical.
 
 ## Features
 * Support for large amount of images, by rendering only some of them at a time, and with easy navigation and smooth animation, the user can see all the images.

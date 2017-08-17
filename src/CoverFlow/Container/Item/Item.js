@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SIDES from '../SIDES';
-import './transition.css';
 
 class Item extends React.Component {
   constructor(props){
     super(props);
     this.cssTransform = this.cssTransform.bind(this);
-    this.state = {tempClassName: ''};
+    this.cssTransformVertical = this.cssTransformVertical.bind(this);
+    this.state = {tempTransform: ''};
   }
   render(){
     let styles = {
       backgroundImage: `url('${this.props.imgUrl}')`,
       left: `calc(50% - ${this.props.width}px / 2)`,
+      top: `calc(50% - ${this.props.height}px / 2)`,
       width: `${this.props.width}px`,
       height: `${this.props.height}px`,
       backgroundSize: `${this.props.width}px ${this.props.height}px`,
@@ -23,9 +24,16 @@ class Item extends React.Component {
       transition: 'transform 750ms',
       boxShadow: '30px 5px 15px -10px rgba(0,0,0,.15), -30px 5px 15px -10px rgba(0,0,0,.15)',
     };
-    if (this.props.side === SIDES.LEFT || this.props.side === SIDES.RIGHT
-          || this.props.side === SIDES.REMOVED_LEFT || this.props.side === SIDES.REMOVED_RIGHT) {
-      styles.transform = this.cssTransform(this.props.side, this.props.distance);
+    if (this.props.side !== SIDES.CENTER) {
+      if (this.state.tempTransform !== ''){
+        styles.transform = this.state.tempTransform;
+      } else {
+        if (this.props.direction === 'vertical') {
+          styles.transform = this.cssTransformVertical(this.props.side, this.props.distance);
+        } else {
+          styles.transform = this.cssTransform(this.props.side, this.props.distance);
+        }
+      }
     }
     if (this.props.side === SIDES.CENTER){
       styles.zIndex = this.props.zIndex;
@@ -52,7 +60,6 @@ class Item extends React.Component {
     return(
       <div 
           style={styles}
-          className={this.state.tempClassName}
           onClick={()=>{
             this.props.selectItem(this.props.index);
           }}
@@ -60,34 +67,46 @@ class Item extends React.Component {
     );
   }
   componentWillMount(){
-    let tempClassName;
-    if (this.props.side === SIDES.LEFT){
-      tempClassName = `initial-left-${this.props.max}`;
-    } else if (this.props.side === SIDES.RIGHT) {
-      tempClassName = `initial-right-${this.props.max}`;
+    let tempTransform;
+    if(this.props.direction === 'vertical') {
+      if (this.props.side === SIDES.LEFT || this.props.side === SIDES.RIGHT){
+        tempTransform = this.cssTransformVertical(this.props.side, this.props.max);
+      } else {
+        tempTransform = '';
+      }
     } else {
-      tempClassName = '';
+      if (this.props.side === SIDES.LEFT || this.props.side === SIDES.RIGHT){
+        tempTransform = this.cssTransform(this.props.side, this.props.max);
+      } else {
+        tempTransform = '';
+      }
     }
-    this.setState({tempClassName});
+    this.setState({tempTransform});
   }
   componentDidMount(){
     this.timeout = setTimeout(()=>{
-      this.setState({tempClassName: ''});
+      this.setState({tempTransform: ''});
     }, 100);
   }
   componentWillUnmount(){
     if (this.timeout){
       clearTimeout(this.timeout);
     }
-    let tempClassName;
-    if (this.props.side === SIDES.LEFT){
-      tempClassName = `initial-left-${this.props.max}`;
-    } else if (this.props.side === SIDES.RIGHT) {
-      tempClassName = `initial-right-${this.props.max}`;
+    let tempTransform;
+    if(this.props.direction === 'vertical') {
+      if (this.props.side === SIDES.LEFT || this.props.side === SIDES.RIGHT){
+        tempTransform = this.cssTransformVertical(this.props.side, this.props.max);
+      } else {
+        tempTransform = '';
+      }
     } else {
-      tempClassName = '';
+      if (this.props.side === SIDES.LEFT || this.props.side === SIDES.RIGHT){
+        tempTransform = this.cssTransform(this.props.side, this.props.max);
+      } else {
+        tempTransform = '';
+      }
     }
-    this.setState({tempClassName});
+    this.setState({tempTransform});
   }
   cssTransform(side, distance){
     const template = (deg, x, z) =>
@@ -115,6 +134,37 @@ class Item extends React.Component {
       return this.cssTransform(SIDES.LEFT, this.props.max);
     } else if (side === SIDES.REMOVED_RIGHT){
       return this.cssTransform(SIDES.RIGHT, this.props.max);
+    } else {
+      throw 'Error: side is undefined or invalid.';
+    }
+  }
+  cssTransformVertical(side, distance){
+    const template = (deg, y, z) =>
+      `rotateX(${deg}deg) translate3d(0px, ${y}px, ${z}px)`;
+
+    const a = Math.floor(this.props.height / 3);
+    const z = -1 * a * distance -a;
+
+    const up = {
+      deg: -45,
+      y: -1 * a * distance,
+      z
+    };
+
+    const down = {
+      deg: 45,
+      y: a * distance,
+      z
+    };
+
+    if (side === SIDES.LEFT) {
+      return template(up.deg, up.y, up.z);
+    } else if (side === SIDES.RIGHT) {
+      return template(down.deg, down.y, down.z);
+    } else if (side === SIDES.REMOVED_LEFT){
+      return this.cssTransformVertical(SIDES.LEFT, this.props.max);
+    } else if (side === SIDES.REMOVED_RIGHT){
+      return this.cssTransformVertical(SIDES.RIGHT, this.props.max);
     } else {
       throw 'Error: side is undefined or invalid.';
     }

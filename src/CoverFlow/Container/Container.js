@@ -35,11 +35,15 @@ class Container extends React.Component {
     };
     let keysConfig = {
       left: previous,
-      right: next
+      right: next,
+      up: next,
+      down: previous
     };
     let touchConfig = {
       left: next,
-      right: previous
+      right: previous,
+      up: next,
+      down: previous
     };
     SwipeReact.config(touchConfig);
     WheelReact.config(touchConfig);
@@ -70,6 +74,7 @@ class Container extends React.Component {
                     height={itemHeight}
                     width={itemWidth}
                     label={item.label}
+                    direction={this.props.direction}
                     key={item.index} />;
         })}
       </div>
@@ -161,15 +166,29 @@ class Container extends React.Component {
   calcItemDimensions(){
     let ratio = {};
     [ratio.x, ratio.y] = this.props.itemRatio.split(':').map(x=>parseFloat(x));
-    const itemHeight = this.props.height - 60;
-    const itemWidth = itemHeight * ratio.x / ratio.y;
+    let itemWidth, itemHeight;
+    if (this.props.direction === 'vertical') {
+      itemWidth = this.props.width - 70;
+      itemHeight = itemWidth * ratio.y / ratio.x;
+    } else {
+      itemHeight = this.props.height - 60;
+      itemWidth = itemHeight * ratio.x / ratio.y;
+    }
     return [itemWidth, itemHeight];
   }
   calcItemsAmountToRender(){
-    const containerWidth = this.props.width;
-    let itemWidth;
-    [itemWidth,] = this.calcItemDimensions();
-    let amount = Math.floor(containerWidth / itemWidth) * 2 - 3;
+    let amount;
+    if (this.props.direction === 'vertical') {
+      const containerHeight = this.props.height;
+      let itemHeight;
+      [,itemHeight] = this.calcItemDimensions();
+      amount = Math.floor(containerHeight / itemHeight) * 2 - 4;
+    } else {
+      const containerWidth = this.props.width;
+      let itemWidth;
+      [itemWidth,] = this.calcItemDimensions();
+      amount = Math.floor(containerWidth / itemWidth) * 2 - 3;
+    }
     if (amount < 3) {
       amount = 3;
     } else if (amount > 11) {
