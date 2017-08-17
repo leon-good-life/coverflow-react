@@ -67,6 +67,7 @@ const imagesArr = [
 
 ## Features
 * Support for large amount of images, by rendering only some of them at a time, and with easy navigation and smooth animation, the user can see all the images.
+* Vertical CoverFlow (In addition to Horizontal CoverFlow).
 ### Multiple input devices support
 * Swipe support on touch devices (smartphones, tablets).
 * Keyboard 'left' and 'right' keys support.
