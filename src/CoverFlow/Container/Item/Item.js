@@ -113,7 +113,7 @@ class Item extends React.Component {
       `rotateY(${deg}deg) translate3d(${x}px, 0px, ${z}px)`;
 
     const a = Math.floor(this.props.width / 3);
-    const z = -1*a * distance - a;
+    const z = (-1*a * distance - a) * 1.08;
 
     const left = {
       deg: 45,
@@ -144,7 +144,7 @@ class Item extends React.Component {
       `rotateX(${deg}deg) translate3d(0px, ${y}px, ${z}px)`;
 
     const a = Math.floor(this.props.height / 3);
-    const z = -1 * a * distance -a;
+    const z = (-1 * a * distance - a) * 1.08;
 
     const up = {
       deg: -45,
