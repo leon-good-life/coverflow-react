@@ -159,7 +159,7 @@ class Container extends React.Component {
       return -1;
     }
     if (length > 10) {
-      return 4;
+      return 5;
     }
     return parseInt(this.props.imagesArr.length / 2, 10);
   }
