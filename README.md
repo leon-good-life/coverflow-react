@@ -75,7 +75,7 @@ const imagesArr = [
 
 ## Contributing
 Opening issues and code contributions are welcomed.
-See [contributing guide](https://github.com/leon-good-life/coverflow-react/CONTRIBUTING.md).
+See [contributing guide](https://github.com/leon-good-life/coverflow-react/blob/master/CONTRIBUTING.md).
 
 ## Credits for images in the demo
 Uncopyrited images from Pixabay and Pexels.
