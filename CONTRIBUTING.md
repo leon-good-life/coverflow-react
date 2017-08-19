@@ -2,7 +2,7 @@
 ## Contributing Guide
 Opening issues and code contributions are welcomed.
 ### Remarks
-* Edit files in `src` directory, don't edit files in `lib` dircetory, they auto generated when running `npm run build` command.
+* Edit files in `src` directory, don't edit files in `lib` dircetory, they are auto generated when running `npm run build` command.
 * The files in this repository don't include demo. You can use [coverflow-react-demo](https://github.com/leon-good-life/coverflow-react-demo) repository.
 ### Installation instructions
 You will need two terminal tabs or windows.
