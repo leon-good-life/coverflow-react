@@ -1,6 +1,6 @@
 {
   "name": "coverflow-react",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "license": "MIT",
   "author": "leon.good.life",
   "main": "main.js",
@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "arrow-keys-react": "^1.0.4",
-    "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

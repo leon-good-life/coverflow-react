@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 import SIDES from './SIDES'
 import Item from './Item/Item';
 import SwipeReact from 'swipe-react';
@@ -103,7 +102,7 @@ class Container extends React.Component {
     const SIDE_AMOUNT = Math.floor(AMOUNT_TO_RENDER / 2);
 
     const index = this.state.selectedIndex;
-    const imagesArr = _.cloneDeep(this.props.imagesArr);
+    const imagesArr = JSON.parse(JSON.stringify(this.props.imagesArr));
     const items = imagesArr.map((imgUrl, index)=>({imgUrl, index, label: null}));
 
     for (let i = 0; i < this.props.labelsArr.length; i++) {
