@@ -69,7 +69,8 @@ CoverFlow.propTypes = {
   emptyMessage: PropTypes.string,
   itemRatio: PropTypes.string,
   handleSelect: PropTypes.func,
-  labelsArr: PropTypes.array
+  labelsArr: PropTypes.array,
+  defaultSelectedItem: PropTypes.number
 };
 
 CoverFlow.defaultProps = {
