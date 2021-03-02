@@ -14,7 +14,7 @@ class Container extends React.Component {
     this.calcIndex = this.calcIndex.bind(this);
     this.calcItemDimensions = this.calcItemDimensions.bind(this);
     this.calcItemsAmountToRender = this.calcItemsAmountToRender.bind(this);
-    let index = this.calcIndex();
+    let index = this.props.defaultSelectedItem || this.props.defaultSelectedItem == 0 ? this.props.defaultSelectedItem : this.calcIndex();
     this.state = {
       selectedIndex: index,
       prevIndex: index,
@@ -205,7 +205,8 @@ Container.propTypes = {
   border: PropTypes.string,
   boxShadow: PropTypes.string,
   itemRatio: PropTypes.string,
-  handleSelect: PropTypes.func
+  handleSelect: PropTypes.func,
+  defaultSelectedItem: PropTypes.number
 };
 
 export default Container;
