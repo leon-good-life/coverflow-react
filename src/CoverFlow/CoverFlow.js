@@ -53,7 +53,8 @@ class CoverFlow extends React.Component {
                 background={this.props.background}
                 border={this.props.border}
                 boxShadow={this.props.boxShadow}
-                direction={this.props.direction} />;
+                direction={this.props.direction}
+                defaultSelectedItem={this.props.defaultSelectedItem} />;
   }
 }
 

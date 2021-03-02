@@ -14,7 +14,7 @@ class Container extends React.Component {
     this.calcIndex = this.calcIndex.bind(this);
     this.calcItemDimensions = this.calcItemDimensions.bind(this);
     this.calcItemsAmountToRender = this.calcItemsAmountToRender.bind(this);
-    let index = this.calcIndex();
+    let index = this.props.defaultSelectedItem ? this.props.defaultSelectedItem : this.calcIndex();
     this.state = {
       selectedIndex: index,
       prevIndex: index,
