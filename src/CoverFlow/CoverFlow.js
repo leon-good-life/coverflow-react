@@ -1,18 +1,23 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
-import EmptyContainer from './Container/EmptyContainer';
+
 import Container from './Container/Container';
+import EmptyContainer from './Container/EmptyContainer';
 
 class CoverFlow extends React.Component {
-  render(){
-
+  render() {
     let width, height;
     if (this.props.direction === 'vertical') {
       width = isNaN(this.props.width) ? 250 : this.props.width;
-      height = isNaN(this.props.height) ? document.body.offsetHeight : this.props.height;
+      height = isNaN(this.props.height)
+        ? document.body.offsetHeight
+        : this.props.height;
     } else {
       height = isNaN(this.props.height) ? 250 : this.props.height;
-      width = isNaN(this.props.width) ? document.body.offsetWidth : this.props.width;
+      width = isNaN(this.props.width)
+        ? document.body.offsetWidth
+        : this.props.width;
     }
 
     let styles = {
@@ -28,32 +33,39 @@ class CoverFlow extends React.Component {
       outline: 'transparent',
       background: this.props.background,
       border: this.props.border,
-      boxShadow: this.props.boxShadow
+      boxShadow: this.props.boxShadow,
     };
 
     if (this.props.imagesArr.length === 0) {
-      return <EmptyContainer 
-                containerStyles={styles}
-                emptyMessage={this.props.emptyMessage}
-                height={this.props.height}
-                width={this.props.width}
-                background={this.props.background}
-                border={this.props.border}
-                boxShadow={this.props.boxShadow} />;
+      return (
+        <EmptyContainer
+          containerStyles={styles}
+          emptyMessage={this.props.emptyMessage}
+          height={this.props.height}
+          width={this.props.width}
+          background={this.props.background}
+          border={this.props.border}
+          boxShadow={this.props.boxShadow}
+        />
+      );
     }
-    return <Container 
-                containerStyles={styles}
-                imagesArr={this.props.imagesArr}
-                labelsArr={this.props.labelsArr}
-                itemRatio={this.props.itemRatio}
-                zIndex={this.props.zIndex}
-                handleSelect={this.props.handleSelect}
-                height={height}
-                width={width}
-                background={this.props.background}
-                border={this.props.border}
-                boxShadow={this.props.boxShadow}
-                direction={this.props.direction} />;
+    return (
+      <Container
+        containerStyles={styles}
+        imagesArr={this.props.imagesArr}
+        labelsArr={this.props.labelsArr}
+        itemRatio={this.props.itemRatio}
+        zIndex={this.props.zIndex}
+        handleSelect={this.props.handleSelect}
+        height={height}
+        width={width}
+        background={this.props.background}
+        border={this.props.border}
+        boxShadow={this.props.boxShadow}
+        direction={this.props.direction}
+        defaultSelectedItem={this.props.defaultSelectedItem}
+      />
+    );
   }
 }
 
@@ -68,7 +80,8 @@ CoverFlow.propTypes = {
   emptyMessage: PropTypes.string,
   itemRatio: PropTypes.string,
   handleSelect: PropTypes.func,
-  labelsArr: PropTypes.array
+  labelsArr: PropTypes.array,
+  defaultSelectedItem: PropTypes.number,
 };
 
 CoverFlow.defaultProps = {
@@ -79,7 +92,7 @@ CoverFlow.defaultProps = {
   boxShadow: 'none',
   emptyMessage: 'No items to show.',
   itemRatio: '8:5',
-  labelsArr: []
+  labelsArr: [],
 };
 
 export default CoverFlow;

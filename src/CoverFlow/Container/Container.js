@@ -1,34 +1,40 @@
 import React from 'react';
+
+import ArrowKeysReact from 'arrow-keys-react';
 import PropTypes from 'prop-types';
-import SIDES from './SIDES'
-import Item from './Item/Item';
 import SwipeReact from 'swipe-react';
 import WheelReact from 'wheel-react';
-import ArrowKeysReact from 'arrow-keys-react';
+
+import Item from './Item/Item';
+import SIDES from './SIDES';
 
 class Container extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.selectItem = this.selectItem.bind(this);
     this.prepareItems = this.prepareItems.bind(this);
     this.calcIndex = this.calcIndex.bind(this);
     this.calcItemDimensions = this.calcItemDimensions.bind(this);
     this.calcItemsAmountToRender = this.calcItemsAmountToRender.bind(this);
-    let index = this.calcIndex();
+    // let index = this.calcIndex();
+    let index =
+      this.props.defaultSelectedItem || this.props.defaultSelectedItem == 0
+        ? this.props.defaultSelectedItem
+        : this.calcIndex();
     this.state = {
       selectedIndex: index,
       prevIndex: index,
-      pauseWheelEvent: false
+      pauseWheelEvent: false,
     };
     let next = () => {
       let index = this.state.selectedIndex;
-      if(index + 1 < this.props.imagesArr.length){
+      if (index + 1 < this.props.imagesArr.length) {
         this.selectItem(index + 1);
       }
     };
     let previous = () => {
       let index = this.state.selectedIndex;
-      if(index > 0){
+      if (index > 0) {
         this.selectItem(index - 1);
       }
     };
@@ -36,66 +42,71 @@ class Container extends React.Component {
       left: previous,
       right: next,
       up: next,
-      down: previous
+      down: previous,
     };
     let touchConfig = {
       left: next,
       right: previous,
       up: next,
-      down: previous
+      down: previous,
     };
     SwipeReact.config(touchConfig);
     WheelReact.config(touchConfig);
     ArrowKeysReact.config(keysConfig);
   }
-  render(){
+  render() {
     let itemWidth, itemHeight;
     [itemWidth, itemHeight] = this.calcItemDimensions();
     let items = this.prepareItems();
-    return(
-      <div tabIndex="0" 
-           style={this.props.containerStyles} 
-           {...SwipeReact.events}
-           {...WheelReact.events}
-           {...ArrowKeysReact.events}
-           ref={(coverflow) => { 
-             this.coverflow = coverflow; 
-           }}>
-        {items.map((item)=>{
-          return <Item 
-                    side={item.side} 
-                    max={Math.floor(this.calcItemsAmountToRender()/2)}
-                    distance={item.distance} 
-                    imgUrl={item.imgUrl}
-                    selectItem={this.selectItem}
-                    index={item.index}
-                    zIndex={this.props.zIndex}
-                    height={itemHeight}
-                    width={itemWidth}
-                    label={item.label}
-                    direction={this.props.direction}
-                    key={item.index} />;
+    return (
+      <div
+        tabIndex='0'
+        style={this.props.containerStyles}
+        {...SwipeReact.events}
+        {...WheelReact.events}
+        {...ArrowKeysReact.events}
+        ref={(coverflow) => {
+          this.coverflow = coverflow;
+        }}
+      >
+        {items.map((item) => {
+          return (
+            <Item
+              side={item.side}
+              max={Math.floor(this.calcItemsAmountToRender() / 2)}
+              distance={item.distance}
+              imgUrl={item.imgUrl}
+              selectItem={this.selectItem}
+              index={item.index}
+              zIndex={this.props.zIndex}
+              height={itemHeight}
+              width={itemWidth}
+              label={item.label}
+              direction={this.props.direction}
+              key={item.index}
+            />
+          );
         })}
       </div>
     );
   }
-  componentDidMount(){
+  componentDidMount() {
     this.coverflow.focus();
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     WheelReact.clearTimeout();
   }
-  selectItem(index){
-    this.setState((prevState)=>({
+  selectItem(index) {
+    this.setState((prevState) => ({
       selectedIndex: index,
-      prevIndex: prevState.selectedIndex
+      prevIndex: prevState.selectedIndex,
     }));
     if (this.props.handleSelect) {
       this.props.handleSelect(index);
     }
   }
-  prepareItems(){
-    if (this.props.imagesArr.length === 0){
+  prepareItems() {
+    if (this.props.imagesArr.length === 0) {
       return [];
     }
     const AMOUNT_TO_RENDER = this.calcItemsAmountToRender();
@@ -103,7 +114,11 @@ class Container extends React.Component {
 
     const index = this.state.selectedIndex;
     const imagesArr = JSON.parse(JSON.stringify(this.props.imagesArr));
-    const items = imagesArr.map((imgUrl, index)=>({imgUrl, index, label: null}));
+    const items = imagesArr.map((imgUrl, index) => ({
+      imgUrl,
+      index,
+      label: null,
+    }));
 
     for (let i = 0; i < this.props.labelsArr.length; i++) {
       items[i].label = this.props.labelsArr[i];
@@ -112,35 +127,35 @@ class Container extends React.Component {
     items[index].distance = 0;
 
     let fromIndex = Math.max(0, index - SIDE_AMOUNT);
-    let untilIndex = Math.min(imagesArr.length, index + SIDE_AMOUNT+1);
+    let untilIndex = Math.min(imagesArr.length, index + SIDE_AMOUNT + 1);
 
-    for(let i = fromIndex; i < index; i++){
+    for (let i = fromIndex; i < index; i++) {
       items[i].side = SIDES.LEFT;
       items[i].distance = index - i;
     }
 
-    for(let i = index + 1; i < untilIndex; i++){
+    for (let i = index + 1; i < untilIndex; i++) {
       items[i].side = SIDES.RIGHT;
       items[i].distance = i - index;
     }
 
-    if (items.length < AMOUNT_TO_RENDER){
+    if (items.length < AMOUNT_TO_RENDER) {
       return items;
     }
 
     // calc removed items, in order to animate them.
     let amount = index - this.state.prevIndex;
     if (amount > 0 && fromIndex > SIDE_AMOUNT) {
-      for(let i = fromIndex - amount; i < fromIndex; i++){
+      for (let i = fromIndex - amount; i < fromIndex; i++) {
         items[i].side = SIDES.REMOVED_LEFT;
         items[i].distance = index - i;
       }
       fromIndex -= amount;
     } else if (amount < 0) {
       amount *= -1;
-      if(untilIndex + amount < items.length){
-        for(let i = untilIndex; i < untilIndex + amount; i++){
-          if(!items[i]){
+      if (untilIndex + amount < items.length) {
+        for (let i = untilIndex; i < untilIndex + amount; i++) {
+          if (!items[i]) {
             debugger;
           }
           items[i].side = SIDES.REMOVED_RIGHT;
@@ -152,7 +167,7 @@ class Container extends React.Component {
 
     return items.slice(fromIndex, untilIndex);
   }
-  calcIndex(){
+  calcIndex() {
     const length = this.props.imagesArr.length;
     if (length === 0) {
       return -1;
@@ -162,30 +177,32 @@ class Container extends React.Component {
     }
     return parseInt(this.props.imagesArr.length / 2, 10);
   }
-  calcItemDimensions(){
+  calcItemDimensions() {
     let ratio = {};
-    [ratio.x, ratio.y] = this.props.itemRatio.split(':').map(x=>parseFloat(x));
+    [ratio.x, ratio.y] = this.props.itemRatio
+      .split(':')
+      .map((x) => parseFloat(x));
     let itemWidth, itemHeight;
     if (this.props.direction === 'vertical') {
       itemWidth = this.props.width - 70;
-      itemHeight = itemWidth * ratio.y / ratio.x;
+      itemHeight = (itemWidth * ratio.y) / ratio.x;
     } else {
       itemHeight = this.props.height - 60;
-      itemWidth = itemHeight * ratio.x / ratio.y;
+      itemWidth = (itemHeight * ratio.x) / ratio.y;
     }
     return [itemWidth, itemHeight];
   }
-  calcItemsAmountToRender(){
+  calcItemsAmountToRender() {
     let amount;
     if (this.props.direction === 'vertical') {
       const containerHeight = this.props.height;
       let itemHeight;
-      [,itemHeight] = this.calcItemDimensions();
+      [, itemHeight] = this.calcItemDimensions();
       amount = Math.floor(containerHeight / itemHeight) * 2 - 4;
     } else {
       const containerWidth = this.props.width;
       let itemWidth;
-      [itemWidth,] = this.calcItemDimensions();
+      [itemWidth] = this.calcItemDimensions();
       amount = Math.floor(containerWidth / itemWidth) * 2 - 3;
     }
     if (amount < 3) {
@@ -205,7 +222,8 @@ Container.propTypes = {
   border: PropTypes.string,
   boxShadow: PropTypes.string,
   itemRatio: PropTypes.string,
-  handleSelect: PropTypes.func
+  handleSelect: PropTypes.func,
+  defaultSelectedItem: PropTypes.number,
 };
 
 export default Container;
